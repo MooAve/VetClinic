@@ -29,7 +29,7 @@ function DoctorsPage() {
 
             <table id="CreateDoctor">
                 <thead>
-                    <th>Create New Client</th>
+                    <th>Create New Doctor</th>
                 </thead>
                 <tbody>
                     <tr>
