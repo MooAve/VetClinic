@@ -1,12 +1,12 @@
 import React from 'react';
 import '../App.css';
 
-function Clients() {
+function HomePage() {
     return (
         <div>
-            <h1>Clients Page</h1>
+            <h1>Home Page</h1>
         </div>
     );
 }
 
-export default Clients;
+export default HomePage;

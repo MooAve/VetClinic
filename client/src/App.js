@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Nav from './components/nav'
-import Home from './pages/Home';
-import Pets from './pages/Pets';
-import Clients from './pages/Clients';
-import Prescriptions from './pages/Prescriptions';
-import Doctors from './pages/Doctors';
-import Clients_Doctors from './pages/Clients_Doctors';
+import Home from './pages/HomePage';
+import Pets from './pages/PetsPage';
+import Clients from './pages/ClientsPage';
+import Prescriptions from './pages/PrescriptionsPage';
+import Doctors from './pages/DoctorsPage';
+import Clients_Doctors from './pages/Clients_DoctorsPage';
 
 
 function App() {
