@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function Nav() {
     return (
         <nav>
-            <h3>Logo</h3>
+            <h3>Vet Clinic Database</h3>
             <ul className='nav-links'>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/Pets">Pets</Link></li>

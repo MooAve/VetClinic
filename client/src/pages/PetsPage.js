@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App.css';
-
+import PetsTable from '../components/PetsTable';
 
 function PetsPage() {
+
+    const [showTable, openTable] = useState(false)
     return (
         <div className="App">
             <h1>Search or Create Pets</h1>
@@ -41,9 +43,11 @@ function PetsPage() {
                     </tr>
                 </tbody>
             </table>
-            <button>Search</button>
-            <button>View All</button>
-
+            <button onClick={() => openTable(true)}>Search</button>
+            <button onClick={() => openTable(true)}>View All</button>
+            <div>
+                    {showTable && <PetsTable />}
+            </div>
             <table id="CreatePet">
                 <thead>
                     <th>Create New Pet</th>
@@ -79,7 +83,7 @@ function PetsPage() {
                     </tr>
                 </tbody>
             </table>
-            <button>Create</button>
+            <button onClick={() => alert("This is the Create Pets Button!")}>Create</button>
         </div>
     );
 }

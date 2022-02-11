@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App.css';
+import ClientsTable from '../components/ClientsTable.js';
 
 function ClientsPage() {
+
+    const [showTable, openTable] = useState(false)
     return (
         <div className="App">
             <h1>Search or Create Clients</h1>
@@ -28,9 +31,11 @@ function ClientsPage() {
                     </tr>
                 </tbody>
             </table>
-            <button>Search</button>
-            <button>View All</button>
-
+            <button onClick={() => openTable(true)}>Search</button>
+            <button onClick={() => openTable(true)}>View All</button>
+            <div>
+                {showTable && <ClientsTable />}
+            </div>
             <table id="CreateClient">
                 <thead>
                     <th>Create New Client</th>
@@ -54,9 +59,10 @@ function ClientsPage() {
                     </tr>
                 </tbody>
             </table>
-            <button>Create</button>
+            <button onClick={() => alert("This is the Create Client Button!")}>Create</button>
         </div>
-    );
-}
+        );
+
+};
 
 export default ClientsPage;

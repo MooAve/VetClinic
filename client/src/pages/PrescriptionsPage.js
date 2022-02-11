@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App.css';
+import PrescriptionsTable from '../components/PrescriptionsTable';
 
 function PrescriptionsPage() {
+
+    const [showTable, openTable] = useState(false)
     return (
         <div className="App">
             <h1>Search or Create Prescriptions</h1>
@@ -28,9 +31,11 @@ function PrescriptionsPage() {
                     </tr>
                 </tbody>
             </table>
-            <button>Search</button>
-            <button>View All</button>
-
+            <button onClick={() => openTable(true)}>Search</button>
+            <button onClick={() => openTable(true)}>View All</button>
+            <div>
+                {showTable && <PrescriptionsTable />}
+            </div>
             <table id="CreatePrescription">
                 <thead>
                     <th>Create New Client</th>
@@ -54,7 +59,7 @@ function PrescriptionsPage() {
                     </tr>
                 </tbody>
             </table>
-            <button>Create</button>
+            <button onClick={() => alert("This is the Create Prescription Button!")}>Create</button>
         </div>
     );
 }
