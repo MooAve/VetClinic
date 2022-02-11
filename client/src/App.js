@@ -16,10 +16,6 @@ import EditPets from './pages/EditPetsPage';
 import EditPrescriptions from './pages/EditPrescriptionsPage';
 import EditCD from './pages/EditClients_DoctorsPage'
 
-const express = require('express');
-const app = express();
-const PORT = 2403;
-
 function App() {
   return (
     <Router>
@@ -44,9 +40,5 @@ function App() {
     
   );
 }
-
-app.listen(PORT, function(){
-  console.log('Express started on http://flip2.engr.oregonstate.edu:' + PORT + '; press Ctrl-C to terminate.')
-});
 
 export default App;
