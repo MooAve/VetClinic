@@ -23,8 +23,8 @@ function PrescriptionsTable() {
                 <td>1/1/2021</td>
                 <td>Gabapentin</td>
                 <td>5</td>
-                <td>Buck</td>
                 <td>Douglas Adams</td>
+                <td>Buck</td>
                 <td id = 'edit'>
                     <GrEdit onClick={() => navigate('/Prescriptions/Edit')}></GrEdit>
                 </td>

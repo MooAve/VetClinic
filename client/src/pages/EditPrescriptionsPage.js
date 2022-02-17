@@ -12,19 +12,19 @@ function EditPrescriptionsPage() {
             <table id="EditPrescription">
                 <tbody>
                     <tr>
-                        <td>Date:</td>
+                        <td>*Date:</td>
                         <td><input type="date" name="prescriptionDate" /></td>
-                        <td>Drug Name:</td>
+                        <td>*Drug Name:</td>
                         <td><input type="text" name="prescriptionDrug" /></td>
                     </tr>
                     <tr>
-                        <td>Dosage:</td>
+                        <td>*Dosage:</td>
                         <td><input type="text" name="prescriptionDosage" /></td>
-                        <td>Pet ID:</td>
+                        <td>*Pet ID:</td>
                         <td><input type="number" name="prescriptionPetID" /></td>
                     </tr>
                     <tr>
-                        <td>Doctor:</td>
+                        <td>*Doctor:</td>
                         <td><input type="text" name="prescriptionDoctor" /></td>
                     </tr>
                 </tbody>

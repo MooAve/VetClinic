@@ -14,13 +14,13 @@ function EditClientsPage() {
                     <tr>
                         <td>Name:</td>
                         <td><input type="text" name="petName" /></td>
-                        <td>Species:</td>
+                        <td>*Species:</td>
                         <td><input type="text" name="petSpecies" /></td>
                     </tr>
                     <tr>
                         <td>Breed:</td>
                         <td><input type="text" name="petBreed" /></td>
-                        <td>Birth Year:</td>
+                        <td>*Birth Year:</td>
                         <td><input type="number" name="petBirthYear" /></td>
                     </tr>
                     <tr>
@@ -32,11 +32,11 @@ function EditClientsPage() {
                     <tr>
                         <td>Weight:</td>
                         <td><input type="number" name="petWeight" /></td>
-                        <td>Sex:</td>
+                        <td>*Sex:</td>
                         <td><input type="text" name="petSex" /></td>
                     </tr>
                     <tr>
-                        <td>Owner Name:</td>
+                        <td>*Owner Name:</td>
                         <td><input type="text" name="petOwner" /></td>
                     </tr>
                 </tbody>

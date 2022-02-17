@@ -32,21 +32,21 @@ function Clients_DoctorsPage() {
             <div>
                 {showTable && <CDTable />}
             </div>
-            <table id="CreateDoctor">
+            <table id="CreateClientDoctor">
                 <thead>
                     <th>Create New Client_Doctor</th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Client First Name:</td>
+                        <td>*Client First Name:</td>
                         <td><input type="text" name="cdClientFName" /></td>
-                        <td>Client Last Name:</td>
+                        <td>*Client Last Name:</td>
                         <td><input type="text" name="cdClientLName" /></td>
                     </tr>
                     <tr>
-                        <td>Dr. First Name:</td>
+                        <td>*Dr. First Name:</td>
                         <td><input type="text" name="cdDoctorFName" /></td>
-                        <td>Dr. Last Name:</td>
+                        <td>*Dr. Last Name:</td>
                         <td><input type="text" name="cdDoctorLName" /></td>
                     </tr>
                 </tbody>
