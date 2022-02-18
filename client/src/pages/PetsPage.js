@@ -81,7 +81,7 @@ function PetsPage() {
                         <td>Sex:</td>
                         <td>
                             <select id="petSex" name="petSex">
-                                <option hidden disabled selected value></option>
+                                <option></option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
