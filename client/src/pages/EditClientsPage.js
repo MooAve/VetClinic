@@ -28,6 +28,7 @@ function EditClientsPage() {
                         <td><input type="text" name="clientEmail" /></td>
                     </tr>
                 </tbody>
+                <tfoot>*Required</tfoot>
             </table>
             <button onClick={() => alert("This button saves client changes!")}>Save</button>
             <button onClick={() => navigate('/Clients')}>Cancel</button>

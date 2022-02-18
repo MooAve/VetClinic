@@ -1,31 +1,52 @@
-.App {
+.App{
   text-align: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 nav{
+  height: 80px;
+  background: #1b1b1b;
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  min-height: 10vh;
-  background: rgb(73, 79, 82);
-  color: white;
+  justify-content: space-between;
+  padding: 0px 50px 0px 100px;
 }
 
-.nav-links{
-  width: 50%;
+nav ul {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   list-style: none;
 }
 
-.nav-links a:link{
-  color:white;
+nav ul li {
+  margin: 0 5px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 8px 10px;
+}
+
+nav .logo {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.nav-links a {
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 5px;
   text-decoration: none;
 }
 
-.nav-links a:visited{
-  color: white;
+a:hover, a:active {
+  background-color: #fff;
+  color: #1b1b1b;
+  transition: all 0.3s ease;
 }
 
 table {
@@ -36,6 +57,11 @@ table {
   margin: 20px;
 }
 
+.site-title {
+  color: white;
+}
+
+/*Used for the SELECT query tables*/
 .displayTable{
   display: table;
   justify-content: center;
@@ -67,4 +93,37 @@ table {
   border-right: solid black .1em;
   border-left: solid black .1em;
   color: black;
+}
+
+/*Used for dropdown menus*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-option {
+  display: none;
+  position: absolute;
+  padding: 12px;
+}
+
+.dropdown-button {
+  border: none;
+}
+
+/*Display contents on hover*/
+.dropdown:hover .dropdown-option {
+  display: block;
+  border: none;
+  z-index: 1;
+}
+
+/*Change dropdown button's color when hovering*/
+.dropdown:hover .dropdown-button {
+  background-color: gray
+}
+
+/*Change option's color when hovering*/
+.dropdown-option button:hover{
+  background-color: darkgray;
 }

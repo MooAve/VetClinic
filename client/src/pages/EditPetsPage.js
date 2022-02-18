@@ -33,13 +33,20 @@ function EditClientsPage() {
                         <td>Weight:</td>
                         <td><input type="number" name="petWeight" /></td>
                         <td>*Sex:</td>
-                        <td><input type="text" name="petSex" /></td>
+                        <td class="dropdown" name="petSex">
+                            <button class="dropdown-button">Choose an Option</button>
+                            <div class="dropdown-option">
+                                <button >Male</button>
+                                <button >Female</button>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td>*Owner Name:</td>
                         <td><input type="text" name="petOwner" /></td>
                     </tr>
                 </tbody>
+                <tfoot>*Required</tfoot>
             </table>
             <button onClick={() => alert("This button saves pet changes!")}>Save</button>
             <button onClick={() => navigate('/Pets')}>Cancel</button>

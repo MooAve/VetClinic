@@ -24,6 +24,7 @@ function EditDoctorsPage() {
                         <td><input type="text" name="doctorEmail" /></td>
                     </tr>
                 </tbody>
+                <tfoot>*Required</tfoot>
             </table>
             <button onClick={() => alert("This button saves doctor changes!")}>Save</button>
             <button onClick={() => navigate('/Doctors')}>Cancel</button>

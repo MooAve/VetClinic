@@ -28,6 +28,7 @@ function EditPrescriptionsPage() {
                         <td><input type="text" name="prescriptionDoctor" /></td>
                     </tr>
                 </tbody>
+                <tfoot>*Required</tfoot>
             </table>
             <button onClick={() => alert("This button saves prescription changes!")}>Save</button>
             <button onClick={() => navigate('/Prescriptions')}>Cancel</button>
