@@ -57,6 +57,10 @@ table {
   margin: 20px;
 }
 
+table tfoot {
+  font-size: 12px;
+}
+
 .site-title {
   color: white;
 }
