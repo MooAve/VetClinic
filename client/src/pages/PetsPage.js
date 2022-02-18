@@ -35,12 +35,12 @@ function PetsPage() {
                         <td>Weight:</td>
                         <td><input type="number" name="petWeight" /></td>
                         <td>*Sex:</td>                     
-                        <td class="dropdown" name="petSex">
-                            <button class="dropdown-button">Choose an Option</button>
-                            <div class="dropdown-option">
-                                <button >Male</button>
-                                <button >Female</button>
-                            </div>
+                        <td>
+                            <select id="petSex" name="petSex">
+                                <option hidden disabled selected value></option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -79,12 +79,12 @@ function PetsPage() {
                         <td>Weight:</td>
                         <td><input type="number" name="petWeight" /></td>
                         <td>Sex:</td>
-                        <td class="dropdown" name="petSex">
-                            <button class="dropdown-button">Choose an Option</button>
-                            <div class="dropdown-option">
-                                <button >Male</button>
-                                <button >Female</button>
-                            </div>
+                        <td>
+                            <select id="petSex" name="petSex">
+                                <option hidden disabled selected value></option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
