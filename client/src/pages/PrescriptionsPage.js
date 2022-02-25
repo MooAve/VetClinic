@@ -52,8 +52,10 @@ function PrescriptionsPage() {
                         <td><input type="number" name="prescriptionPetID" /></td>
                     </tr>
                     <tr>
-                        <td>Doctor Name:</td>
-                        <td><input type="text" name="prescriptionDoctor" /></td>
+                        <td>Dr. First Name:</td>
+                        <td><input type="text" name="prescriptionDrFName" /></td>
+                        <td>Dr. Last Name:</td>
+                        <td><input type="text" name="prescriptionDrLName" /></td>
                     </tr>
                 </tbody>
             </table>

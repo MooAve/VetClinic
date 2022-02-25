@@ -88,8 +88,10 @@ function PetsPage() {
                         </td>
                     </tr>
                     <tr>
-                        <td>Owner Name:</td>
-                        <td><input type="text" name="petOwner" /></td>
+                        <td>Owner First Name:</td>
+                        <td><input type="text" name="petOwnerFName" /></td>
+                        <td>Owner Last Name:</td>
+                        <td><input type="text" name="petOwnerLName" /></td>
                     </tr>
                 </tbody>
             </table>
