@@ -12,16 +12,12 @@ function EditClientsDoctorsPage() {
             <table id="EditClient_Doctor">
                 <tbody>
                     <tr>
-                        <td>*Client First Name:</td>
-                        <td><input type="text" name="cdClientFName" /></td>
-                        <td>*Client Last Name:</td>
-                        <td><input type="text" name="cdClientLName" /></td>
+                        <td>*Client ID:</td>
+                        <td><select name="cdClientID" /></td>
                     </tr>
                     <tr>
-                        <td>*Dr. First Name:</td>
-                        <td><input type="text" name="cdDoctorFName" /></td>
-                        <td>*Dr. Last Name:</td>
-                        <td><input type="text" name="cdDoctorLName" /></td>
+                        <td>*Doctor ID:</td>
+                        <td><select name="cdDoctorID" /></td>
                     </tr>
                 </tbody>
                 <tfoot>*Required</tfoot>

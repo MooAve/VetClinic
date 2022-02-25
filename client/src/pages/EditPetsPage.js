@@ -43,7 +43,7 @@ function EditClientsPage() {
                     </tr>
                     <tr>
                         <td>*Owner Name:</td>
-                        <td><input type="text" name="petOwner" /></td>
+                        <td><select id="petOwner" name="petOwner" /></td>
                     </tr>
                 </tbody>
                 <tfoot>*Required</tfoot>

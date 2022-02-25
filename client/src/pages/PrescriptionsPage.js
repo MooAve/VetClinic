@@ -23,11 +23,11 @@ function PrescriptionsPage() {
                         <td>*Dosage:</td>
                         <td><input type="text" name="prescriptionDosage" /></td>
                         <td>*Pet ID:</td>
-                        <td><input type="number" name="prescriptionPetID" /></td>
+                        <td><select name="prescriptionPetID" /></td>
                     </tr>
                     <tr>
-                        <td>*Doctor:</td>
-                        <td><input type="text" name="prescriptionDoctor" /></td>
+                        <td>*Doctor ID:</td>
+                        <td><select name="prescriptionDoctorID" /></td>
                     </tr>
                 </tbody>
                 <tfoot>*Required</tfoot>
@@ -48,11 +48,11 @@ function PrescriptionsPage() {
                     <tr>
                         <td>Dosage:</td>
                         <td><input type="text" name="prescriptionDosage" /></td>
-                        <td>Pet ID:</td>
+                        <td>Pet Name:</td>
                         <td><input type="number" name="prescriptionPetID" /></td>
                     </tr>
                     <tr>
-                        <td>Doctor:</td>
+                        <td>Doctor Name:</td>
                         <td><input type="text" name="prescriptionDoctor" /></td>
                     </tr>
                 </tbody>
