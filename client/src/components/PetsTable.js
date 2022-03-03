@@ -1,11 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-//import PetsTableRow from './PetsTableRow';          //Used to populate row data (to be added)
-import { GrFormTrash, GrEdit } from 'react-icons/gr'; //Use for Delete/Edit Icons
+import PetsRow from './PetsRow';          
 
-function PetsTable() {
-
-    const navigate = useNavigate();
+function PetsTable( {pets} ) {
 
     return (
         <table class="displayTable">
@@ -24,21 +20,8 @@ function PetsTable() {
                 <th>Delete</th>
             </thead>
             <tbody>
-                <td>Buck</td>
-                <td>Dog</td>
-                <td>Lab</td>
-                <td>2012</td>
-                <td>04</td>
-                <td>14</td>
-                <td>85</td>
-                <td>Male</td>
-                <td>Nick Johnsmith</td>
-                <td id = 'edit'>
-                    <GrEdit onClick={() => navigate("/Pets/Edit")}></GrEdit>
-                </td>
-                <td id = 'delete'>
-                    <GrFormTrash onClick={() => alert("This is the Delete Pet Button!")}></GrFormTrash>
-                </td>
+                {pets.map((pet, i) => <PetsRow pet={pet}
+                        /*deletePet={deletePet} editPet={editPet}*/ key={i} />)}   
             </tbody>
         </table>
     );

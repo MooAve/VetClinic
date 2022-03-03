@@ -1,11 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-//import ClientsTableRow from './ClientsTableRow';            //Used to populate row data (to be added)
-import { GrFormTrash, GrEdit } from 'react-icons/gr'; //Use for Delete/Edit Icons
+import ClientsRow from './ClientsRow';            //Used to populate row data (to be added)
 
-function ClientsTable() {
-
-    const navigate = useNavigate();
+function ClientsTable( {clients} ) {
 
     return (
         <table class="displayTable">
@@ -21,18 +17,8 @@ function ClientsTable() {
                 <th>Delete</th>
             </thead>
             <tbody>
-                <td>Nick</td>
-                <td>Johnsmith</td>
-                <td>32831 Tuskan St. Portland, Oregon</td>
-                <td>123-446-5321</td>
-                <td>sjohnsmith32@gmail.com</td>
-                <td>Buck</td>
-                <td id = 'edit'>
-                    <GrEdit onClick={() => navigate('/Clients/Edit')}></GrEdit>
-                </td>
-                <td id = 'delete'>
-                    <GrFormTrash onClick={() => alert("This is the Delete Client Button!")}></GrFormTrash>
-                </td>
+                {clients.map((client, i) => <ClientsRow client={client} 
+                        /*deleteClient={deleteClient} EditClient={EditClient}*/ key={i} />)}
             </tbody>
         </table>
     );

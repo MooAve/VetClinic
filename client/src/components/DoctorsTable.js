@@ -1,11 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-//import DoctorsTableRow from './DoctorsTableRow';            //Used to populate row data (to be added)
-import { GrFormTrash, GrEdit } from 'react-icons/gr'; //Use for Delete/Edit Icons
+import DoctorsRow from './DoctorsRow';            //Used to populate row data 
 
-function DoctorsTable() {
-
-    const navigate = useNavigate();
+function DoctorsTable( {doctors} ) {
 
     return (
         <table class="displayTable">
@@ -19,16 +15,8 @@ function DoctorsTable() {
                 <th>Delete</th>
             </thead>
             <tbody>
-                <td>Douglas</td>
-                <td>Adams</td>
-                <td>999-222-333</td>
-                <td>dadams@clinic.com</td>
-                <td id = 'edit'>
-                    <GrEdit onClick={() => navigate('/Doctors/Edit')}></GrEdit>
-                </td>
-                <td id = 'delete'>
-                    <GrFormTrash onClick={() => alert("This is the Delete Doctor Button!")}></GrFormTrash>
-                </td>
+                {doctors.map((doctor, i) => <DoctorsRow doctor={doctor}
+                        /*deleteDoctor={deleteDoctor} editDoctort={editDoctor}*/ key={i} />)}
             </tbody>
         </table>
     );
