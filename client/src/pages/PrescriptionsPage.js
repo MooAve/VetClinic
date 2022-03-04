@@ -16,7 +16,7 @@ function PrescriptionsPage() {
     const [doctorList, setDoctorList] = useState([])
 
     const createPrescription = () => {
-        Axios.post('http://localhost:3001/clients/insert', {
+        Axios.post('http://localhost:3001/prescriptions/insert', {
             date: date,
             drug: drug,
             dosage: dosage,
@@ -66,8 +66,9 @@ function PrescriptionsPage() {
                         <td><select name="prescriptionPetID" onChange= {((e)=> {
                             setPetID(e.target.value)
                         })}>
+                                <option hidden disabled selected value></option>
                                 {petList.map((val) => {
-                                    return <option value="{val.petID}">{val.petID}</option>
+                                    return <option value={val.petID}>{val.petID}</option>
                                 })}
                             </select> 
                         </td>
@@ -77,8 +78,9 @@ function PrescriptionsPage() {
                         <td><select name="prescriptionDoctorID" onChange= {((e)=> {
                             setDoctorID(e.target.value)
                         })}>
+                                <option hidden disabled selected value></option>
                                 {doctorList.map((val) => {
-                                    return <option value="{val.doctorID}">{val.doctorID}</option>
+                                    return <option value={val.doctorID}>{val.doctorID}</option>
                                 })}
                             </select>
                         </td>

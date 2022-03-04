@@ -101,8 +101,9 @@ function PetsPage() {
                         <td><select id="clientID" name="clientID" onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
+                                <option hidden disabled selected value></option>
                                 {clientList.map((val) => {
-                                    return <option value="{val.clientID}">{val.clientID}</option>
+                                    return <option value={val.clientID}>{val.clientID}</option>
                                 })}
                             </select>
                         </td>

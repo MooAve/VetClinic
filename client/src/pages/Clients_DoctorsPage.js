@@ -23,13 +23,13 @@ function Clients_DoctorsPage() {
 
     useEffect(() => {
         Axios.get('http://localhost:3001/clients/get').then((response) => {
-            setClientList(response.data)
+            setClientList(response.data);
         })
     }, [])
 
     useEffect(() => {
         Axios.get('http://localhost:3001/doctors/get').then((response) => {
-            setDoctorList(response.data)
+            setDoctorList(response.data);
         })
     }, [])
 
@@ -46,8 +46,9 @@ function Clients_DoctorsPage() {
                         <td><select name="cdClientID" onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
+                                <option hidden disabled selected value></option>
                                 {clientList.map((val) => {
-                                    return <option value="{val.clientID}">{val.clientID}</option>
+                                    return <option value={val.clientID}>{val.clientID}</option>
                                 })}
                             </select> 
                         </td>
@@ -57,8 +58,9 @@ function Clients_DoctorsPage() {
                         <td><select name="cdDoctorID" onChange= {((e)=> {
                             setDoctorID(e.target.value)
                         })}>
+                                <option hidden disabled selected value></option>
                                 {doctorList.map((val) => {
-                                    return <option value="{val.doctorID}">{val.doctorID}</option>
+                                    return <option value={val.doctorID}>{val.doctorID}</option>
                                 })}
                             </select>
                         </td>
@@ -66,7 +68,7 @@ function Clients_DoctorsPage() {
                 </tbody>
                 <tfoot>*Required</tfoot>
             </table>
-            <button onClick={() => alert("This is the Create Client-Doctor Button!")}>Create</button>
+            <button onClick={createClients_Doctors}>Create</button>
             
             <table id="SearchClients_Doctors">
                 <thead>
