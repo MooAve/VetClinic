@@ -1,18 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
-import Axios from 'axios';
+import Axios from 'axios'
 import PetsTable from '../components/PetsTable';
 
 function PetsPage() {
 
-    const [showTable, openTable] = useState(false)
+    const [showTable, openTable] = useState(true)
     const [pets, setPets] = useState([])
-
-    useEffect(() => {
-        Axios.get('http://localhost:3001/pets/get').then((response) => {
-            setPets(response.data)
-        });
-    }, []);
 
     const [name, setName] = useState('')
     const [species, setSpecies] = useState('')
@@ -23,11 +17,18 @@ function PetsPage() {
     const [weight, setWeight] = useState('')
     const [sex, setSex] = useState('')
     const [clientID, setClientID] = useState('')
-    const [clientList, setClientList] = useState([])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/api/get').then((response) => {
+            setPets(response.data)
+            console.log(response)
+        });
+    }, []);
 
 
     const createPet = () => {
-        Axios.post('http://localhost:3001/pets/insert', {
+        console.log('hello!!!');
+        Axios.post('http://localhost:3001/api/insert', {
             name: name,
             species: species,
             breed: breed,
@@ -38,16 +39,14 @@ function PetsPage() {
             sex: sex,
             clientID: clientID
         }).then(()=> {
-            console.log(clientID)
             alert('successful insert');
         });
     };
 
-    useEffect(() => {
-        Axios.get('http://localhost:3001/clients/get').then((response) => {
-            setClientList(response.data)
-        })
-    }, [])
+    const clear = () => {
+        alert('hello');
+        console.log('hello');
+    }
 
     return (
         <div className="App">
@@ -63,40 +62,26 @@ function PetsPage() {
                             setName(e.target.value)
                         })} /></td>
                         <td>*Species:</td>
-                        <td><input type="text" name="species" onChange={((e)=> {
-                            setSpecies(e.target.value)
-                        })} /></td>
+                        <td><input type="text" name="species" /></td>
                     </tr>
                     <tr>
                         <td>Breed:</td>
-                        <td><input type="text" name="breed" onChange={((e)=> {
-                            setBreed(e.target.value)
-                        })} /></td>
+                        <td><input type="text" name="breed" /></td>
                         <td>*Birth Year:</td>
-                        <td><input type="number" name="birthYear" onChange={((e)=> {
-                            setBirthYear(e.target.value)
-                        })} /></td>
+                        <td><input type="number" name="birthYear" /></td>
                     </tr>
                     <tr>
                         <td>Birth month:</td>
-                        <td><input type="number" name="birthMonth" onChange={((e)=> {
-                            setBirthMonth(e.target.value)
-                        })} /></td>
+                        <td><input type="number" name="birthMonth" /></td>
                         <td>Birth day:</td>
-                        <td><input type="number" name="birthDay" onChange={((e)=> {
-                            setBirthDay(e.target.value)
-                        })} /></td>
+                        <td><input type="number" name="birthDay" /></td>
                     </tr>
                     <tr>
                         <td>Weight:</td>
-                        <td><input type="number" name="weight" onChange={((e)=> {
-                            setWeight(e.target.value)
-                        })} /></td>
+                        <td><input type="number" name="weight" /></td>
                         <td>*Sex:</td>                     
                         <td>
-                            <select id="sex" name="sex" onChange= {((e)=> {
-                                setSex(e.target.value)
-                            })}>
+                            <select id="sex" name="sex">
                                 <option hidden disabled selected value></option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -105,20 +90,13 @@ function PetsPage() {
                     </tr>
                     <tr>
                         <td>*Owner ID:</td>
-                        <td><select id="clientID" name="clientID" onChange= {((e)=> {
-                            setClientID(e.target.value)
-                        })}>
-                                <option hidden disabled selected value></option>
-                                {clientList.map((val) => {
-                                    return <option value={val.clientID}>{val.clientID}</option>
-                                })}
-                            </select>
-                        </td>
+                        <td><select id="clientID" name="clientID" /></td>
                     </tr>
                 </tbody>
                 <tfoot>*Required</tfoot>
             </table>
             <button onClick={createPet}>Create</button>
+            <button onClick={clear}>Clear</button>
             
             <table id="SearchPets">
                 <thead>
@@ -164,9 +142,9 @@ function PetsPage() {
                 </tbody>
             </table>
             <button onClick={() => openTable(true)}>Search</button>
-            <button onClick={() => openTable(true)}>View All</button>
+            <button onClick={setPets}>View All</button>
             <div>
-                    {showTable && <PetsTable pets={pets} />}
+                    <PetsTable pets={pets} />
             </div>
         </div>
     );
