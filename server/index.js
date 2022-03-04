@@ -6,10 +6,10 @@ const mysql = require('mysql');
 
 const db = mysql.createPool({
     connectionLimit : 10,
-  host            : 'classmysql.engr.oregonstate.edu',
-  user            : 'cs340_stoddjon',
-  password        : '9198',
-  database        : 'cs340_stoddjon'
+  host            : '',
+  user            : '',
+  password        : '',
+  database        : ''
 });
 
 app.use(cors());
