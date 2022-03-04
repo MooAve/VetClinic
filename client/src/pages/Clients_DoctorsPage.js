@@ -1,10 +1,38 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css';
+import Axios from 'axios';
 import CDTable from '../components/ClientsDoctorsTable';
 
 function Clients_DoctorsPage() {
 
     const [showTable, openTable] = useState(false)
+
+    const [clientID, setClientID] = useState('')
+    const [doctorID, setDoctorID] = useState('')
+    const [clientList, setClientList] = useState([])
+    const [doctorList, setDoctorList] = useState([])
+
+    const createClients_Doctors = () => {
+        Axios.post('http://localhost:3001/clients_doctors/insert', {
+            clientID: clientID,
+            doctorID: doctorID
+        }).then(()=> {
+            alert('successful insert');
+        });
+    };
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/clients/get').then((response) => {
+            setClientList(response.data)
+        })
+    }, [])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/doctors/get').then((response) => {
+            setDoctorList(response.data)
+        })
+    }, [])
+
     return (
         <div className="App">
             <h1>Search or Create Client_Doctor Relationships</h1>
@@ -15,11 +43,25 @@ function Clients_DoctorsPage() {
                 <tbody>
                     <tr>
                         <td>*Client ID:</td>
-                        <td><select name="cdClientID" /></td>
+                        <td><select name="cdClientID" onChange= {((e)=> {
+                            setClientID(e.target.value)
+                        })}>
+                                {clientList.map((val) => {
+                                    return <option value="{val.clientID}">{val.clientID}</option>
+                                })}
+                            </select> 
+                        </td>
                     </tr>
                     <tr>
                         <td>*Doctor ID:</td>
-                        <td><select name="cdDoctorID" /></td>
+                        <td><select name="cdDoctorID" onChange= {((e)=> {
+                            setDoctorID(e.target.value)
+                        })}>
+                                {doctorList.map((val) => {
+                                    return <option value="{val.doctorID}">{val.doctorID}</option>
+                                })}
+                            </select>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>*Required</tfoot>

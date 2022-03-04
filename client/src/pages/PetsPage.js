@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
-import Axios from 'axios'
+import Axios from 'axios';
 import PetsTable from '../components/PetsTable';
 
 function PetsPage() {
@@ -16,11 +16,11 @@ function PetsPage() {
     const [weight, setWeight] = useState('')
     const [sex, setSex] = useState('')
     const [clientID, setClientID] = useState('')
+    const [clientList, setClientList] = useState([])
 
 
     const createPet = () => {
-        console.log('hello!!!');
-        Axios.post('http://localhost:3001/api/insert', {
+        Axios.post('http://localhost:3001/pets/insert', {
             name: name,
             species: species,
             breed: breed,
@@ -31,14 +31,16 @@ function PetsPage() {
             sex: sex,
             clientID: clientID
         }).then(()=> {
+            console.log(clientID)
             alert('successful insert');
         });
     };
 
-    const clear = () => {
-        alert('hello');
-        console.log('hello');
-    }
+    useEffect(() => {
+        Axios.get('http://localhost:3001/clients/get').then((response) => {
+            setClientList(response.data)
+        })
+    }, [])
 
     return (
         <div className="App">
@@ -54,26 +56,40 @@ function PetsPage() {
                             setName(e.target.value)
                         })} /></td>
                         <td>*Species:</td>
-                        <td><input type="text" name="species" /></td>
+                        <td><input type="text" name="species" onChange={((e)=> {
+                            setSpecies(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Breed:</td>
-                        <td><input type="text" name="breed" /></td>
+                        <td><input type="text" name="breed" onChange={((e)=> {
+                            setBreed(e.target.value)
+                        })} /></td>
                         <td>*Birth Year:</td>
-                        <td><input type="number" name="birthYear" /></td>
+                        <td><input type="number" name="birthYear" onChange={((e)=> {
+                            setBirthYear(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Birth month:</td>
-                        <td><input type="number" name="birthMonth" /></td>
+                        <td><input type="number" name="birthMonth" onChange={((e)=> {
+                            setBirthMonth(e.target.value)
+                        })} /></td>
                         <td>Birth day:</td>
-                        <td><input type="number" name="birthDay" /></td>
+                        <td><input type="number" name="birthDay" onChange={((e)=> {
+                            setBirthDay(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Weight:</td>
-                        <td><input type="number" name="weight" /></td>
+                        <td><input type="number" name="weight" onChange={((e)=> {
+                            setWeight(e.target.value)
+                        })} /></td>
                         <td>*Sex:</td>                     
                         <td>
-                            <select id="sex" name="sex">
+                            <select id="sex" name="sex" onChange= {((e)=> {
+                                setSex(e.target.value)
+                            })}>
                                 <option hidden disabled selected value></option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -82,13 +98,19 @@ function PetsPage() {
                     </tr>
                     <tr>
                         <td>*Owner ID:</td>
-                        <td><select id="clientID" name="clientID" /></td>
+                        <td><select id="clientID" name="clientID" onChange= {((e)=> {
+                            setClientID(e.target.value)
+                        })}>
+                                {clientList.map((val) => {
+                                    return <option value="{val.clientID}">{val.clientID}</option>
+                                })}
+                            </select>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>*Required</tfoot>
             </table>
             <button onClick={createPet}>Create</button>
-            <button onClick={clear}>Clear</button>
             
             <table id="SearchPets">
                 <thead>
