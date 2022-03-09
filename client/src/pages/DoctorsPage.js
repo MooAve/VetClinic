@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css';
 import Axios from 'axios';
 import DoctorsTable from '../components/DoctorsTable.js';
@@ -6,6 +6,13 @@ import DoctorsTable from '../components/DoctorsTable.js';
 function DoctorsPage() {
 
     const [showTable, openTable] = useState(false)
+    const [doctors, setDoctors] = useState([])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/doctors/get').then((response) => {
+            setDoctors(response.data)
+        });
+    }, []);
 
     const [fname, setFName] = useState('')
     const [lname, setLName] = useState('')
@@ -79,7 +86,7 @@ function DoctorsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                    {showTable && <DoctorsTable />}
+                    {showTable && <DoctorsTable doctors={doctors} />}
             </div>
         </div>
     );

@@ -6,6 +6,13 @@ import PrescriptionsTable from '../components/PrescriptionsTable';
 function PrescriptionsPage() {
 
     const [showTable, openTable] = useState(false)
+    const [prescriptions, setPrescriptions] = useState([])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/prescriptions/get').then((response) => {
+            setPrescriptions(response.data)
+        });
+    }, []);
 
     const [date, setDate] = useState('')
     const [drug, setDrug] = useState('')
@@ -118,7 +125,7 @@ function PrescriptionsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                {showTable && <PrescriptionsTable />}
+                {showTable && <PrescriptionsTable prescriptions={prescriptions} />}
             </div>
         </div>
     );

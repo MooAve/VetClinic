@@ -14,8 +14,8 @@ function PetsRow({pet}) {
             <td>{pet.sex}</td>
             <td>{pet.clientID}</td>
 
-            <td>GrEdit</td>
-            <td>GrFormTrash</td>
+            <td><GrEdit /></td>
+            <td><GrFormTrash /></td>
         </tr>
     );
 };

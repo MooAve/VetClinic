@@ -12,7 +12,6 @@ function ClientsTable( {clients} ) {
                 <th>Address</th>
                 <th>Phone Number</th>
                 <th>Email</th>
-                <th>Pet</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </thead>

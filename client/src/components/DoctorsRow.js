@@ -4,13 +4,13 @@ import { GrFormTrash, GrEdit } from 'react-icons/gr';
 function DoctorsRow({doctor}) {
     return(
         <tr>
-            <td>{doctor.doctorFName}</td>
-            <td>{doctor.doctorLName}</td>
-            <td>{doctor.doctorPhone}</td>
-            <td>{doctor.doctorEmail}</td>
+            <td>{doctor.fname}</td>
+            <td>{doctor.lname}</td>
+            <td>{doctor.phone}</td>
+            <td>{doctor.email}</td>
 
-            <td>GrEdit</td>
-            <td>GrFormTrash</td>
+            <td><GrEdit /></td>
+            <td><GrFormTrash /></td>
         </tr>
     );
 };

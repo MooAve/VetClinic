@@ -6,6 +6,13 @@ import CDTable from '../components/ClientsDoctorsTable';
 function Clients_DoctorsPage() {
 
     const [showTable, openTable] = useState(false)
+    const [clients_doctors, setClients_Doctors] = useState([])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/clients_doctors/get').then((response) => {
+            setClients_Doctors(response.data)
+        });
+    }, []);
 
     const [clientID, setClientID] = useState('')
     const [doctorID, setDoctorID] = useState('')
@@ -92,7 +99,7 @@ function Clients_DoctorsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                {showTable && <CDTable />}
+                {showTable && <CDTable clients_doctors={clients_doctors} />}
             </div>
         </div>
     );

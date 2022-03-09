@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css';
 import Axios from 'axios';
 import ClientsTable from '../components/ClientsTable.js';
@@ -6,6 +6,13 @@ import ClientsTable from '../components/ClientsTable.js';
 function ClientsPage() {
 
     const [showTable, openTable] = useState(false)
+    const [clients, setClients] = useState([])
+
+    useEffect(() => {
+        Axios.get('http://localhost:3001/clients/get').then((response) => {
+            setClients(response.data)
+        });
+    }, []);
 
     const [fname, setFName] = useState('')
     const [lname, setLName] = useState('')
@@ -14,7 +21,7 @@ function ClientsPage() {
     const [email, setEmail] = useState('')
 
     const createClient = () => {
-        Axios.post('http://localhost:3001/prescriptions/insert', {
+        Axios.post('http://localhost:3001/clients/insert', {
             fname: fname,
             lname: lname,
             address: address,
@@ -90,7 +97,7 @@ function ClientsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                {showTable && <ClientsTable />}
+                {showTable && <ClientsTable clients={clients} />}
             </div>
         </div>
         );
