@@ -1,7 +1,7 @@
 import React from 'react';
 import ClientsDoctorsRow from './ClientsDoctorsRow';            //Used to populate row data
 
-function CDTable( {clients_doctors} ) {
+function CDTable( {clients_doctors, deleteClientDoctor} ) {
 
     return (
         <table class="displayTable">
@@ -14,7 +14,7 @@ function CDTable( {clients_doctors} ) {
             </thead>
             <tbody>
                 {clients_doctors.map((clientDoctor, i) => <ClientsDoctorsRow clientDoctor={clientDoctor}
-                        /*deleteClientDoctor={deleteClientDoctor} editClientDoctor={editClientDoctor}*/ key={i} />)}
+                        deleteClientDoctor={deleteClientDoctor} /*editClientDoctor={editClientDoctor}*/ key={i} />)}
             </tbody>
         </table>
     );

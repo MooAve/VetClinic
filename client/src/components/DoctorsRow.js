@@ -1,7 +1,7 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
 
-function DoctorsRow({doctor}) {
+function DoctorsRow({doctor, deleteDoctor}) {
     return(
         <tr>
             <td>{doctor.fname}</td>
@@ -10,7 +10,7 @@ function DoctorsRow({doctor}) {
             <td>{doctor.email}</td>
 
             <td><GrEdit /></td>
-            <td><GrFormTrash /></td>
+            <td><GrFormTrash onClick={ () => deleteDoctor(doctor.doctorID)} /></td>
         </tr>
     );
 };

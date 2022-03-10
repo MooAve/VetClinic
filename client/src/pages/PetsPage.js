@@ -55,7 +55,7 @@ function PetsPage() {
         Axios.get('http://localhost:3001/clients/get').then((response) => {
             setClientList(response.data)
         })
-    }, [])
+    }, []);
 
     return (
         <div className="App">

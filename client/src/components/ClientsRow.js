@@ -1,7 +1,7 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
 
-function ClientsRow({client}) {
+function ClientsRow({client, deleteClient}) {
     return(
         <tr>
             <td>{client.fname}</td>
@@ -11,7 +11,7 @@ function ClientsRow({client}) {
             <td>{client.email}</td>
 
             <td><GrEdit /></td>
-            <td><GrFormTrash /></td>
+            <td><GrFormTrash onClick={ () => deleteClient(client.clientID)}/></td>
         </tr>
     );
 };

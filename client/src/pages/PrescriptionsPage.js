@@ -34,6 +34,14 @@ function PrescriptionsPage() {
         });
     };
 
+    const deletePrescription = prescriptionID => {
+        console.log(prescriptionID)
+        Axios.delete(`http://localhost:3001/prescriptions/${prescriptionID}`, {
+        }).then(()=> {
+            alert("prescription deleted")
+        });
+    };
+
     useEffect(() => {
         Axios.get('http://localhost:3001/pets/get').then((response) => {
             setPetList(response.data)
@@ -51,7 +59,7 @@ function PrescriptionsPage() {
             <h1>Search or Create Prescriptions</h1>
             <table id="CreatePrescription">
                 <thead>
-                    <th>Create New Client</th>
+                    <th>Create New Prescription</th>
                 </thead>
                 <tbody>
                     <tr>
@@ -125,7 +133,7 @@ function PrescriptionsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                {showTable && <PrescriptionsTable prescriptions={prescriptions} />}
+                {showTable && <PrescriptionsTable prescriptions={prescriptions} deletePrescription={deletePrescription} />}
             </div>
         </div>
     );

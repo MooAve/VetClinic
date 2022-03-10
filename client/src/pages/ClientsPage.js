@@ -32,6 +32,14 @@ function ClientsPage() {
         });
     };
 
+    const deleteClient = clientID => {
+        console.log(clientID)
+        Axios.delete(`http://localhost:3001/clients/${clientID}`, {
+        }).then(()=> {
+            alert("client deleted")
+        });
+    };
+
     return (
         <div className="App">
             <h1>Search or Create Clients</h1>
@@ -97,7 +105,7 @@ function ClientsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                {showTable && <ClientsTable clients={clients} />}
+                {showTable && <ClientsTable clients={clients} deleteClient={deleteClient} />}
             </div>
         </div>
         );

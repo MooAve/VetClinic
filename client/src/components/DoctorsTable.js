@@ -1,7 +1,7 @@
 import React from 'react';
 import DoctorsRow from './DoctorsRow';            //Used to populate row data 
 
-function DoctorsTable( {doctors} ) {
+function DoctorsTable( {doctors, deleteDoctor} ) {
 
     return (
         <table class="displayTable">
@@ -16,7 +16,7 @@ function DoctorsTable( {doctors} ) {
             </thead>
             <tbody>
                 {doctors.map((doctor, i) => <DoctorsRow doctor={doctor}
-                        /*deleteDoctor={deleteDoctor} editDoctort={editDoctor}*/ key={i} />)}
+                        deleteDoctor={deleteDoctor} /*editDoctort={editDoctor}*/ key={i} />)}
             </tbody>
         </table>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
 
-function PrescriptionsRow({prescription}) {
+function PrescriptionsRow({prescription, deletePrescription}) {
     return(
         <tr>
             <td>{prescription.date}</td>
@@ -11,7 +11,7 @@ function PrescriptionsRow({prescription}) {
             <td>{prescription.petID}</td>
 
             <td><GrEdit /></td>
-            <td><GrFormTrash /></td>
+            <td><GrFormTrash onClick={ () => deletePrescription(prescription.prescriptionID)} /></td>
         </tr>
     );
 };

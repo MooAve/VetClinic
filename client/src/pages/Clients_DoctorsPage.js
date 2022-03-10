@@ -28,6 +28,14 @@ function Clients_DoctorsPage() {
         });
     };
 
+    const deleteClientDoctor = (clientID, doctorID) => {
+        console.log(clientID, doctorID)
+        Axios.delete(`http://localhost:3001/clients_doctors/${clientID}/${doctorID}`, {
+        }).then(()=> {
+            alert("clients_doctors relationship deleted")
+        });
+    };
+
     useEffect(() => {
         Axios.get('http://localhost:3001/clients/get').then((response) => {
             setClientList(response.data);
@@ -45,7 +53,7 @@ function Clients_DoctorsPage() {
             <h1>Search or Create Client_Doctor Relationships</h1>
             <table id="CreateClientDoctor">
                 <thead>
-                    <th>Create New Client_Doctor</th>
+                    <th>Create New Clients_Doctors Relationship</th>
                 </thead>
                 <tbody>
                     <tr>
@@ -99,7 +107,7 @@ function Clients_DoctorsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                {showTable && <CDTable clients_doctors={clients_doctors} />}
+                {showTable && <CDTable clients_doctors={clients_doctors} deleteClientDoctor={deleteClientDoctor} />}
             </div>
         </div>
     );

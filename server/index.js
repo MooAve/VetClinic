@@ -50,14 +50,12 @@ app.post("/pets/insert", (req, res) => {
 });
 
 app.delete("/pets/:id", (req, res) => {
-
-    petID = req.params.id
-
-    const sqlDelete = "DELETE FROM Pets WHERE petID = ?"
+    petID = req.params.id;
+    const sqlDelete = "DELETE FROM Pets WHERE petID = ?";
     db.query(sqlDelete, petID, (err, result) => {
         if (err) console.log(err)
-    })
-})
+    });
+});
 
 app.get("/clients/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Clients";
@@ -78,6 +76,14 @@ app.post("/clients/insert", (req, res) => {
     const sqlInsert = "INSERT INTO Clients (fname, lname, address, phone, email) VALUES (?,?,?,?,?)";
     db.query(sqlInsert, [fname, lname, address, phone, email], (err, result) => {
         console.log(err);
+    });
+});
+
+app.delete("/clients/:id", (req, res) => {
+    clientID = req.params.id;
+    const sqlDelete = "DELETE FROM Clients WHERE clientID = ?";
+    db.query(sqlDelete, clientID, (err, result) => {
+        if (err) console.log(err)
     });
 });
 
@@ -103,6 +109,14 @@ app.post("/prescriptions/insert", (req, res) => {
     });
 });
 
+app.delete("/prescriptions/:id", (req, res) => {
+    prescriptionID = req.params.id;
+    const sqlDelete = "DELETE FROM Prescriptions WHERE prescriptionID = ?";
+    db.query(sqlDelete, prescriptionID, (err, result) => {
+        if (err) console.log(err)
+    });
+});
+
 app.get("/doctors/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Doctors";
     db.query(sqlSelect, (err, result) => {
@@ -124,6 +138,14 @@ app.post("/doctors/insert", (req, res) => {
     });
 });
 
+app.delete("/doctors/:id", (req, res) => {
+    doctorID = req.params.id;
+    const sqlDelete = "DELETE FROM Doctors WHERE doctorID = ?";
+    db.query(sqlDelete, doctorID, (err, result) => {
+        if (err) console.log(err)
+    });
+});
+
 app.get("/clients_doctors/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Clients_Doctors";
     db.query(sqlSelect, (err, result) => {
@@ -140,6 +162,16 @@ app.post("/clients_doctors/insert", (req, res) => {
     const sqlInsert = "INSERT INTO Clients_Doctors (clientID, doctorID) VALUES (?,?)";
     db.query(sqlInsert, [clientID, doctorID], (err, result) => {
         console.log(err);
+    });
+});
+
+app.delete("/clients_doctors/:clientID/:doctorID", (req, res) => {
+    console.log(req.params)
+    clientID = req.params.clientID;
+    doctorID = req.params.doctorID;
+    const sqlDelete = "DELETE FROM Clients_Doctors WHERE clientID = ? AND doctorID = ?";
+    db.query(sqlDelete, clientID, doctorID, (err, result) => {
+        if (err) console.log(err)
     });
 });
 

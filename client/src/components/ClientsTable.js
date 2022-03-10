@@ -1,7 +1,7 @@
 import React from 'react';
 import ClientsRow from './ClientsRow';            //Used to populate row data (to be added)
 
-function ClientsTable( {clients} ) {
+function ClientsTable( {clients, deleteClient} ) {
 
     return (
         <table class="displayTable">
@@ -17,7 +17,7 @@ function ClientsTable( {clients} ) {
             </thead>
             <tbody>
                 {clients.map((client, i) => <ClientsRow client={client} 
-                        /*deleteClient={deleteClient} EditClient={EditClient}*/ key={i} />)}
+                        deleteClient={deleteClient} /* EditClient={EditClient}*/ key={i} />)}
             </tbody>
         </table>
     );

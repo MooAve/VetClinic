@@ -30,6 +30,13 @@ function DoctorsPage() {
         });
     };
 
+    const deleteDoctor = doctorID => {
+        console.log(doctorID)
+        Axios.delete(`http://localhost:3001/doctors/${doctorID}`, {
+        }).then(()=> {
+            alert("doctor deleted")
+        });
+    };
 
     return (
         <div className="App">
@@ -86,7 +93,7 @@ function DoctorsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                    {showTable && <DoctorsTable doctors={doctors} />}
+                    {showTable && <DoctorsTable doctors={doctors} deleteDoctor={deleteDoctor} />}
             </div>
         </div>
     );

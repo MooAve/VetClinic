@@ -1,7 +1,7 @@
 import React from 'react';
 import PrescriptionsRow from './PrescriptionsRow';            //Used to populate row data
 
-function PrescriptionsTable( {prescriptions} ) {
+function PrescriptionsTable( {prescriptions, deletePrescription} ) {
 
     return (
         <table class="displayTable">
@@ -17,7 +17,7 @@ function PrescriptionsTable( {prescriptions} ) {
             </thead>
             <tbody>
                 {prescriptions.map((prescription, i) => <PrescriptionsRow prescription={prescription}
-                        /*deletePrescription={deletePrescription} editPrescription={editPrescription}*/ key={i} />)}   
+                        deletePrescription={deletePrescription} /*editPrescription={editPrescription}*/ key={i} />)}   
             </tbody>
         </table>
     );
