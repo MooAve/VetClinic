@@ -2,6 +2,15 @@ import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
 
 function PetsRow({pet, deletePet}) {
+
+    function confirmDelete() {
+        let confirmDelete = window.confirm(`Are you sure you want to delete ${pet.name}?`);
+        if (confirmDelete) {
+            alert(`Entry ${pet.name} deleted successfully`)
+            deletePet(pet.petID)
+        }
+    }
+
     return(
         <tr>
             <td>{pet.name}</td>
@@ -15,7 +24,7 @@ function PetsRow({pet, deletePet}) {
             <td>{pet.clientID}</td>
 
             <td><GrEdit/></td>
-            <td><GrFormTrash  onClick={ () => deletePet(pet.petID)}/></td>
+            <td><GrFormTrash  onClick={ () => confirmDelete()}/></td>
         </tr>
     );
 };
