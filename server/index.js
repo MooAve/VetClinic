@@ -170,7 +170,7 @@ app.delete("/clients_doctors/:clientID/:doctorID", (req, res) => {
     clientID = req.params.clientID;
     doctorID = req.params.doctorID;
     const sqlDelete = "DELETE FROM Clients_Doctors WHERE clientID = ? AND doctorID = ?";
-    db.query(sqlDelete, clientID, doctorID, (err, result) => {
+    db.query(sqlDelete, [clientID, doctorID], (err, result) => {
         if (err) console.log(err)
     });
 });
