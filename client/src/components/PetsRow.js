@@ -1,5 +1,6 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
 function PetsRow({pet, deletePet}) {
 
@@ -23,7 +24,7 @@ function PetsRow({pet, deletePet}) {
             <td>{pet.sex}</td>
             <td>{pet.clientID}</td>
 
-            <td><GrEdit/></td>
+            <td><Link to="/Pets/Edit"><GrEdit /></Link></td>
             <td><GrFormTrash  onClick={ () => confirmDelete()}/></td>
         </tr>
     );

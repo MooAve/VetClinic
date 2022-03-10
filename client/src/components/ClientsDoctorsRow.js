@@ -1,5 +1,6 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
 function ClientsDoctorsRow({clientDoctor, deleteClientDoctor}) {
     return(
@@ -7,7 +8,7 @@ function ClientsDoctorsRow({clientDoctor, deleteClientDoctor}) {
             <td>{clientDoctor.clientID}</td>
             <td>{clientDoctor.doctorID}</td>
 
-            <td><GrEdit /></td>
+            <td><Link to="/Clients_Doctors/Edit"><GrEdit /></Link></td>
             <td><GrFormTrash onClick={ () => deleteClientDoctor(clientDoctor.clientID, clientDoctor.doctorID)} /></td>
         </tr>
     );

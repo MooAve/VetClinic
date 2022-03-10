@@ -1,5 +1,6 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
 function ClientsRow({client, deleteClient}) {
 
@@ -19,7 +20,7 @@ function ClientsRow({client, deleteClient}) {
             <td>{client.phone}</td>
             <td>{client.email}</td>
 
-            <td><GrEdit /></td>
+            <td><Link to="/Clients/Edit"><GrEdit /></Link></td>
             <td><GrFormTrash onClick={ () => confirmDelete()}/></td>
         </tr>
     );

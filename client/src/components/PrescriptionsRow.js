@@ -1,5 +1,6 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
 function PrescriptionsRow({prescription, deletePrescription}) {
 
@@ -19,7 +20,7 @@ function PrescriptionsRow({prescription, deletePrescription}) {
             <td>{prescription.doctorID}</td>
             <td>{prescription.petID}</td>
 
-            <td><GrEdit /></td>
+            <td><Link to="/Prescriptions/Edit"><GrEdit /></Link></td>
             <td><GrFormTrash onClick={ () => confirmDelete()} /></td>
         </tr>
     );
