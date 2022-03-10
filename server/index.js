@@ -3,19 +3,19 @@ const bodyParser = require("body-parser");
 const cors = require('cors');
 const app = express();
 const mysql = require('mysql');
+const dbpool = require('./dbpool.js')
 
-const db = mysql.createPool({
-    connectionLimit : 10,
-  host            : 'classmysql.engr.oregonstate.edu',
-  user            : 'cs340_stoddjon',
-  password        : '9198',
-  database        : 'cs340_stoddjon'
-});
+const db = mysql.createPool(dbpool.dbpool)
+
+db.getConnection(function (err) {
+     if (err) throw err
+
+     console.log("Connected to Database!")
+})
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 app.get("/",(req, res) => {
     res.send("hello world");
@@ -48,6 +48,16 @@ app.post("/pets/insert", (req, res) => {
         console.log(err);
     });
 });
+
+app.delete("/pets/:id", (req, res) => {
+
+    petID = req.params.id
+
+    const sqlDelete = "DELETE FROM Pets WHERE petID = ?"
+    db.query(sqlDelete, petID, (err, result) => {
+        if (err) console.log(err)
+    })
+})
 
 app.get("/clients/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Clients";

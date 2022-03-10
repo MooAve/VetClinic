@@ -1,7 +1,7 @@
 import React from 'react';
 import { GrFormTrash, GrEdit } from 'react-icons/gr';
 
-function PetsRow({pet}) {
+function PetsRow({pet, deletePet}) {
     return(
         <tr>
             <td>{pet.name}</td>
@@ -14,8 +14,8 @@ function PetsRow({pet}) {
             <td>{pet.sex}</td>
             <td>{pet.clientID}</td>
 
-            <td><GrEdit /></td>
-            <td><GrFormTrash /></td>
+            <td><GrEdit/></td>
+            <td><GrFormTrash  onClick={ () => deletePet(pet.petID)}/></td>
         </tr>
     );
 };

@@ -43,6 +43,14 @@ function PetsPage() {
         });
     };
 
+    const deletePet = petID => {
+        console.log(petID)
+        Axios.delete(`http://localhost:3001/pets/${petID}`, {
+        }).then(()=> {
+            alert("pet deleted")
+        });
+    };
+
     useEffect(() => {
         Axios.get('http://localhost:3001/clients/get').then((response) => {
             setClientList(response.data)
@@ -166,7 +174,7 @@ function PetsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                    {showTable && <PetsTable pets={pets} />}
+                    {showTable && <PetsTable pets={pets} deletePet={deletePet} />}
             </div>
         </div>
     );
