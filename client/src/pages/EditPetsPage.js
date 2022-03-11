@@ -35,8 +35,8 @@ function EditPetsPage() {
             sex: sex,
             clientID: clientID
         }).then(()=> {
-            console.log(clientID)
-            alert('successful insert');
+            alert("Successfully updated pet!")
+            navigate('/Pets')
         });
     };
 
@@ -92,8 +92,8 @@ function EditPetsPage() {
                                 setSex(e.target.value)
                             })}>
                                 <option hidden disabled selected></option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                         </td>
                     </tr>

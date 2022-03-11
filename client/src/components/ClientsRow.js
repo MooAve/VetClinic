@@ -20,7 +20,7 @@ function ClientsRow({client, deleteClient}) {
             <td>{client.phone}</td>
             <td>{client.email}</td>
 
-            <td><Link to="/Clients/Edit"><GrEdit /></Link></td>
+            <td><Link to={"/Clients/Edit"} state={client}><GrEdit /></Link></td>
             <td><GrFormTrash onClick={ () => confirmDelete()}/></td>
         </tr>
     );

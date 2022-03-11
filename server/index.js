@@ -22,6 +22,10 @@ app.get("/",(req, res) => {
     console.log("done")
 });
 
+//-------------------------
+//     Pets Requests
+//-------------------------
+
 app.get("/pets/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Pets";
     db.query(sqlSelect, (err, result) => {
@@ -49,7 +53,7 @@ app.post("/pets/insert", (req, res) => {
     });
 });
 
-app.put("/pets/update/:id", (req, res) => {
+app.put("/pets/edit/:id", (req, res) => {
     
     const petID = req.params.id
 
@@ -65,7 +69,8 @@ app.put("/pets/update/:id", (req, res) => {
 
     const sqlUpdate = "UPDATE Pets SET name = ?, species = ?, breed = ?, birthYear = ?, birthMonth = ?, birthDay = ?, weight = ?, sex = ?, clientID = ? WHERE petID = ?";
     db.query(sqlUpdate, [name, species, breed, birthYear, birthMonth, birthDay, weight, sex, clientID, petID], (err, result) => {
-        console.log(err);
+        if (err) console.log(err);
+        else res.send(result);
     });
 });
 
@@ -76,6 +81,10 @@ app.delete("/pets/:id", (req, res) => {
         if (err) console.log(err)
     });
 });
+
+//-------------------------
+//    Clients Requests
+//-------------------------
 
 app.get("/clients/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Clients";
@@ -99,6 +108,23 @@ app.post("/clients/insert", (req, res) => {
     });
 });
 
+app.put("/clients/edit/:id", (req, res) => {
+    
+    const clientID = req.params.id;
+
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const email = req.body.email;
+
+    const sqlUpdate = "UPDATE Clients SET fname = ?, lname = ?, address = ?, phone = ?, email = ? WHERE clientID = ?";
+    db.query(sqlUpdate, [fname, lname, address, phone, email, clientID], (err, result) => {
+        if (err) console.log(err);
+        else res.send(result)
+    });
+});
+
 app.delete("/clients/:id", (req, res) => {
     clientID = req.params.id;
     const sqlDelete = "DELETE FROM Clients WHERE clientID = ?";
@@ -106,6 +132,10 @@ app.delete("/clients/:id", (req, res) => {
         if (err) console.log(err)
     });
 });
+
+//-------------------------
+// Prescriptions Requests
+//-------------------------
 
 app.get("/prescriptions/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Prescriptions";
@@ -137,6 +167,10 @@ app.delete("/prescriptions/:id", (req, res) => {
     });
 });
 
+//-------------------------
+//    Doctors Requests
+//-------------------------
+
 app.get("/doctors/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Doctors";
     db.query(sqlSelect, (err, result) => {
@@ -166,6 +200,10 @@ app.delete("/doctors/:id", (req, res) => {
     });
 });
 
+//-------------------------
+//Clients-Doctors Requests
+//-------------------------
+
 app.get("/clients_doctors/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Clients_Doctors";
     db.query(sqlSelect, (err, result) => {
@@ -184,6 +222,21 @@ app.post("/clients_doctors/insert", (req, res) => {
         console.log(err);
     });
 });
+
+app.put("/clients_doctors/edit/:clientID/:doctorID"), (req, res) => {
+
+    const clientID = req.params.clientID
+    const doctorID = req.params.doctorID
+
+    const newClientID = req.body.clientID
+    const newDoctorID = req.body.doctorID
+
+    const sqlUpdate = "UPDATE Clients_Doctors SET clientID = ?, doctorID = ? WHERE clientID = ? AND doctorID = ?"
+    db.query(sqlUpdate, [newClientID, newDoctorID, clientID, doctorID], (err, result) => {
+        if (err) console.log(err)
+        else res.send(result)
+    })
+}
 
 app.delete("/clients_doctors/:clientID/:doctorID", (req, res) => {
     console.log(req.params)
