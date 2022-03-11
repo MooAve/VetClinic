@@ -1,7 +1,7 @@
 import React from 'react';
 import PetsRow from './PetsRow';          
 
-function PetsTable( {pets, deletePet, editPet} ) {
+function PetsTable( {pets, deletePet} ) {
 
     return (
         <table class="displayTable">

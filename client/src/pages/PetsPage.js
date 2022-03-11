@@ -25,7 +25,6 @@ function PetsPage() {
     const [clientID, setClientID] = useState('')
     const [clientList, setClientList] = useState([])
 
-
     const createPet = () => {
         Axios.post('http://localhost:3001/pets/insert', {
             name: name,
