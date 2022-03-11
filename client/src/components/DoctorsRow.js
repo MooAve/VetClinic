@@ -19,7 +19,7 @@ function DoctorsRow({doctor, deleteDoctor}) {
             <td>{doctor.phone}</td>
             <td>{doctor.email}</td>
 
-            <td><Link to="/Doctors/Edit"><GrEdit /></Link></td>
+            <td><Link to={"/Doctors/Edit"} state={doctor}><GrEdit /></Link></td>
             <td><GrFormTrash onClick={ () => confirmDelete()} /></td>
         </tr>
     );

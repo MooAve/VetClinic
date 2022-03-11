@@ -20,7 +20,7 @@ function PrescriptionsRow({prescription, deletePrescription}) {
             <td>{prescription.doctorID}</td>
             <td>{prescription.petID}</td>
 
-            <td><Link to="/Prescriptions/Edit"><GrEdit /></Link></td>
+            <td><Link to={"/Prescriptions/Edit"} state={prescription}><GrEdit /></Link></td>
             <td><GrFormTrash onClick={ () => confirmDelete()} /></td>
         </tr>
     );
