@@ -1,7 +1,7 @@
 import React from 'react';
 import PetsRow from './PetsRow';          
 
-function PetsTable( {pets, deletePet} ) {
+function PetsTable( {pets, deletePet, editPet} ) {
 
     return (
         <table class="displayTable">
@@ -21,7 +21,7 @@ function PetsTable( {pets, deletePet} ) {
             </thead>
             <tbody>
                 {pets.map((pet, i) => <PetsRow pet={pet}
-                        deletePet={deletePet} /*editPet={editPet}*/ key={i} />)}   
+                        deletePet={deletePet} key={i} />)}   
             </tbody>
         </table>
     );

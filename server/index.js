@@ -49,6 +49,26 @@ app.post("/pets/insert", (req, res) => {
     });
 });
 
+app.put("/pets/update/:id", (req, res) => {
+    
+    const petID = req.params.id
+
+    const name = req.body.name;
+    const species = req.body.species;
+    const breed = req.body.breed;
+    const birthYear = req.body.birthYear;
+    const birthMonth = req.body.birthMonth;
+    const birthDay = req.body.birthDay;
+    const weight = req.body.weight;
+    const sex = req.body.sex;
+    const clientID = req.body.clientID;
+
+    const sqlUpdate = "UPDATE Pets SET name = ?, species = ?, breed = ?, birthYear = ?, birthMonth = ?, birthDay = ?, weight = ?, sex = ?, clientID = ? WHERE petID = ?";
+    db.query(sqlUpdate, [name, species, breed, birthYear, birthMonth, birthDay, weight, sex, clientID, petID], (err, result) => {
+        console.log(err);
+    });
+});
+
 app.delete("/pets/:id", (req, res) => {
     petID = req.params.id;
     const sqlDelete = "DELETE FROM Pets WHERE petID = ?";

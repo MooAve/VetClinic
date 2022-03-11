@@ -24,7 +24,7 @@ function PetsRow({pet, deletePet}) {
             <td>{pet.sex}</td>
             <td>{pet.clientID}</td>
 
-            <td><Link to="/Pets/Edit"><GrEdit /></Link></td>
+            <td><Link to={"/Pets/Edit"} state={pet.petID}><GrEdit /></Link></td>
             <td><GrFormTrash  onClick={ () => confirmDelete()}/></td>
         </tr>
     );

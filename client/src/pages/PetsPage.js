@@ -174,7 +174,7 @@ function PetsPage() {
             <button onClick={() => openTable(true)}>Search</button>
             <button onClick={() => openTable(true)}>View All</button>
             <div>
-                    {showTable && <PetsTable pets={pets} deletePet={deletePet} />}
+                    {showTable && <PetsTable pets={pets} deletePet={deletePet}/>}
             </div>
         </div>
     );
