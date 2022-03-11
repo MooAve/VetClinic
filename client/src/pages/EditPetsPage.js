@@ -11,15 +11,15 @@ function EditPetsPage() {
 
     const pet = location.state
 
-    const [name, setName] = useState('')
-    const [species, setSpecies] = useState('')
-    const [breed, setBreed] = useState('')
-    const [birthYear, setBirthYear] = useState('')
-    const [birthMonth, setBirthMonth] = useState('')
-    const [birthDay, setBirthDay] = useState('')
-    const [weight, setWeight] = useState('')
-    const [sex, setSex] = useState('')
-    const [clientID, setClientID] = useState('')
+    const [name, setName] = useState(pet.name)
+    const [species, setSpecies] = useState(pet.species)
+    const [breed, setBreed] = useState(pet.breed)
+    const [birthYear, setBirthYear] = useState(pet.birthYear)
+    const [birthMonth, setBirthMonth] = useState(pet.birthMonth)
+    const [birthDay, setBirthDay] = useState(pet.birthDay)
+    const [weight, setWeight] = useState(pet.weight)
+    const [sex, setSex] = useState(pet.sex)
+    const [clientID, setClientID] = useState(pet.clientID)
     const [clientList, setClientList] = useState([])
 
     const updatePet = () => {
@@ -53,45 +53,45 @@ function EditPetsPage() {
                 <tbody>
                     <tr>
                         <td>Name:</td>
-                        <td><input type="text" name="name" defaultValue={pet.name} onChange={((e)=> {
+                        <td><input type="text" name="name" defaultValue={name} onChange={((e)=> {
                             setName(e.target.value)
                         })} /></td>
                         <td>*Species:</td>
-                        <td><input type="text" name="species" defaultValue={pet.species} onChange={((e)=> {
+                        <td><input type="text" name="species" defaultValue={species} onChange={((e)=> {
                             setSpecies(e.target.value)
                         })} /></td>
                     </tr>
                     <tr>
                         <td>Breed:</td>
-                        <td><input type="text" name="breed" defaultValue={pet.breed} onChange={((e)=> {
+                        <td><input type="text" name="breed" defaultValue={breed} onChange={((e)=> {
                             setBreed(e.target.value)
                         })} /></td>
                         <td>*Birth Year:</td>
-                        <td><input type="number" name="birthYear" defaultValue={pet.birthYear} onChange={((e)=> {
+                        <td><input type="number" name="birthYear" defaultValue={birthYear} onChange={((e)=> {
                             setBirthYear(e.target.value)
                         })} /></td>
                     </tr>
                     <tr>
                         <td>Birth month:</td>
-                        <td><input type="number" name="birthMonth" defaultValue={pet.birthMonth} onChange={((e)=> {
+                        <td><input type="number" name="birthMonth" defaultValue={birthMonth} onChange={((e)=> {
                             setBirthMonth(e.target.value)
                         })} /></td>
                         <td>Birth day:</td>
-                        <td><input type="number" name="birthDay" defaultValue={pet.birthDay} onChange={((e)=> {
+                        <td><input type="number" name="birthDay" defaultValue={birthDay} onChange={((e)=> {
                             setBirthDay(e.target.value)
                         })} /></td>
                     </tr>
                     <tr>
                         <td>Weight:</td>
-                        <td><input type="number" name="weight" defaultValue={pet.weight} onChange={((e)=> {
+                        <td><input type="number" name="weight" defaultValue={weight} onChange={((e)=> {
                             setWeight(e.target.value)
                         })} /></td>
                         <td>*Sex:</td>                     
                         <td>
-                            <select id="sex" name="sex" defaultValue={pet.sex} onChange= {((e)=> {
+                            <select id="sex" name="sex" defaultValue={sex} onChange= {((e)=> {
                                 setSex(e.target.value)
                             })}>
-                                <option hidden disabled selected value></option>
+                                <option hidden disabled selected></option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
@@ -99,9 +99,10 @@ function EditPetsPage() {
                     </tr>
                     <tr>
                         <td>*Owner ID:</td>
-                        <td><select id="clientID" name="clientID" defaultValue={pet.clientID} onChange= {((e)=> {
+                        <td><select id="clientID" name="clientID" defaultValue={clientID} onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
+                                <option hidden defaultValue={true}>{clientID}</option>
                                 {clientList.map((val) => {
                                     return <option value={val.clientID}>{val.clientID}</option>
                                 })}
