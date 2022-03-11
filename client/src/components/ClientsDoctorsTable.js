@@ -9,12 +9,11 @@ function CDTable( {clients_doctors, deleteClientDoctor} ) {
             <thead>
                 <th>clientID</th>
                 <th>doctorID</th>
-                <th>Edit</th>
                 <th>Delete</th>
             </thead>
             <tbody>
                 {clients_doctors.map((clientDoctor, i) => <ClientsDoctorsRow clientDoctor={clientDoctor}
-                        deleteClientDoctor={deleteClientDoctor} /*editClientDoctor={editClientDoctor}*/ key={i} />)}
+                        deleteClientDoctor={deleteClientDoctor} key={i} />)}
             </tbody>
         </table>
     );

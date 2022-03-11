@@ -223,21 +223,6 @@ app.post("/clients_doctors/insert", (req, res) => {
     });
 });
 
-app.put("/clients_doctors/edit/:clientID/:doctorID"), (req, res) => {
-
-    const clientID = req.params.clientID
-    const doctorID = req.params.doctorID
-
-    const newClientID = req.body.clientID
-    const newDoctorID = req.body.doctorID
-
-    const sqlUpdate = "UPDATE Clients_Doctors SET clientID = ?, doctorID = ? WHERE clientID = ? AND doctorID = ?"
-    db.query(sqlUpdate, [newClientID, newDoctorID, clientID, doctorID], (err, result) => {
-        if (err) console.log(err)
-        else res.send(result)
-    })
-}
-
 app.delete("/clients_doctors/:clientID/:doctorID", (req, res) => {
     console.log(req.params)
     clientID = req.params.clientID;

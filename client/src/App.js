@@ -14,7 +14,6 @@ import EditClients from './pages/EditClientsPage';
 import EditDoctors from './pages/EditDoctorsPage';
 import EditPets from './pages/EditPetsPage';
 import EditPrescriptions from './pages/EditPrescriptionsPage';
-import EditCD from './pages/EditClients_DoctorsPage'
 
 function App() {
   return (
@@ -33,7 +32,6 @@ function App() {
           <Route path="/Doctors/Edit" element={<EditDoctors />}/>
           <Route path="/Pets/Edit" element={<EditPets />}/>
           <Route path="/Prescriptions/Edit" element={<EditPrescriptions />}/>
-          <Route path="/Clients_Doctors/Edit" element={<EditCD />}/>
         </Routes>
       </div>
     </Router>
