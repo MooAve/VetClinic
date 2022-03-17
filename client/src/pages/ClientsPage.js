@@ -5,20 +5,32 @@ import ClientsTable from '../components/ClientsTable.js';
 
 function ClientsPage() {
 
-    const [showTable, openTable] = useState(false)
     const [clients, setClients] = useState([])
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/clients/get').then((response) => {
-            setClients(response.data)
-        });
+        loadClients();
     }, []);
 
+    //Get data from 'Create' field
     const [fname, setFName] = useState('')
     const [lname, setLName] = useState('')
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+
+    //Get data from 'Search' field
+    const [sFname, searchFname] = useState('')
+    const [sLname, searchLname] = useState('')
+    const [sAddress, searchAddress] = useState('')
+    const [sPhone, searchPhone] = useState('')
+    const [sEmail, searchEmail] = useState('')
+
+    //
+    const loadClients = () => {
+        Axios.get('http://localhost:3001/clients/get').then((response) => {
+            setClients(response.data)
+        });
+    }
 
     const createClient = () => {
         Axios.post('http://localhost:3001/clients/insert', {
@@ -29,6 +41,20 @@ function ClientsPage() {
             email: email
         }).then(()=> {
             alert('successful insert');
+            loadClients();
+        });
+    };
+
+    const searchClients = () => {
+        Axios.post('http://localhost:3001/clients/search', {
+            fname: sFname,
+            lname: sLname,
+            address: sAddress,
+            phone: sPhone,
+            email: sEmail
+        }).then((response)=> {
+            setClients(response.data)
+            alert('Search Complete')
         });
     };
 
@@ -36,7 +62,8 @@ function ClientsPage() {
         console.log(clientID)
         Axios.delete(`http://localhost:3001/clients/${clientID}`, {
         }).then(()=> {
-            alert("client deleted")
+            alert("Client deleted");
+            loadClients();
         });
     };
 
@@ -86,26 +113,36 @@ function ClientsPage() {
                 <tbody>
                     <tr>
                         <td>First Name:</td>
-                        <td><input type="text" name="clientFName" /></td>
+                        <td><input type="text" name="clientFName" onChange={((e)=> {
+                            searchFname(e.target.value)
+                        })} /></td>
                         <td>Last Name:</td>
-                        <td><input type="text" name="clientLName" /></td>
+                        <td><input type="text" name="clientLName" onChange={((e)=> {
+                            searchLname(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Address:</td>
-                        <td><input type="text" name="clientAddress" /></td>
+                        <td><input type="text" name="clientAddress" onChange={((e)=> {
+                            searchAddress(e.target.value)
+                        })} /></td>
                         <td>Phone:</td>
-                        <td><input type="text" name="clientPhone" /></td>
+                        <td><input type="text" name="clientPhone" onChange={((e)=> {
+                            searchPhone(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td><input type="text" name="clientEmail" /></td>
+                        <td><input type="text" name="clientEmail" onChange={((e)=> {
+                            searchEmail(e.target.value)
+                        })} /></td>
                     </tr>
                 </tbody>
             </table>
-            <button onClick={() => openTable(true)}>Search</button>
-            <button onClick={() => openTable(true)}>View All</button>
+            <button onClick={() => searchClients()}>Search</button>
+            <button onClick={() => loadClients()}>View All</button>
             <div>
-                {showTable && <ClientsTable clients={clients} deleteClient={deleteClient} />}
+                {<ClientsTable clients={clients} deleteClient={deleteClient} />}
             </div>
         </div>
         );

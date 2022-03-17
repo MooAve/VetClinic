@@ -8,7 +8,7 @@ function PetsPage() {
     const [pets, setPets] = useState([])
 
     useEffect(() => {
-        loadPets()
+        loadPets();
     }, []);
 
     //Get data from 'Create' field
@@ -38,7 +38,7 @@ function PetsPage() {
     const loadPets = () => {
         Axios.get('http://localhost:3001/pets/get').then((response) => {
             setPets(response.data)
-        })
+        });
     }
 
     const createPet = () => {
@@ -54,7 +54,7 @@ function PetsPage() {
             clientID: clientID
         }).then(()=> {
             alert('successful insert');
-            loadPets()
+            loadPets();
         });
     };
 

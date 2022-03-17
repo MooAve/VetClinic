@@ -46,7 +46,8 @@ app.post("/pets/search", (req, res) => {
     const sex = req.body.sex;
     const clientID = req.body.clientID;
 
-    const sqlSearch = `SELECT 
+    const sqlSearch = `SELECT
+        petID, 
         name, 
         species, 
         breed, 
@@ -54,7 +55,8 @@ app.post("/pets/search", (req, res) => {
         birthYear, 
         birthMonth, 
         birthDay, 
-        weight 
+        weight,
+        clientID 
         FROM Pets WHERE
         (? = '' OR name = ?)
         AND (? = '' OR species = ?)
@@ -129,6 +131,34 @@ app.delete("/pets/:id", (req, res) => {
 app.get("/clients/get", (req, res) => {
     const sqlSelect = "SELECT * FROM Clients";
     db.query(sqlSelect, (err, result) => {
+        res.send(result);
+    });
+});
+
+app.post("/clients/search", (req, res) => {
+    
+    
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const address = req.body.address;
+    const phone = req.body.phone;
+    const email = req.body.email;
+
+    const sqlSearch = `SELECT 
+        clientID,
+        fname, 
+        lname, 
+        address, 
+        phone, 
+        email
+        FROM Clients WHERE
+        (? = '' OR fname = ?)
+        AND (? = '' OR lname = ?)
+        AND (? = '' OR address = ?)
+        AND (? = '' OR phone = ?)
+        AND (? = '' OR email = ?)`
+
+    db.query(sqlSearch, [fname, fname, lname, lname, address, address, phone, phone, email, email], (err, result) => {
         res.send(result);
     });
 });
