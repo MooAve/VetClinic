@@ -5,7 +5,6 @@ import PetsTable from '../components/PetsTable';
 
 function PetsPage() {
 
-    const [showTable, openTable] = useState(false)
     const [pets, setPets] = useState([])
 
     useEffect(() => {
@@ -25,6 +24,16 @@ function PetsPage() {
     const [clientID, setClientID] = useState('')
     const [clientList, setClientList] = useState([])
 
+    const [sName, searchName] = useState('')
+    const [sSpecies, searchSpecies] = useState('')
+    const [sBreed, searchBreed] = useState('')
+    const [sBirthYear, searchBirthYear] = useState('')
+    const [sBirthMonth, searchBirthMonth] = useState('')
+    const [sBirthDay, searchBirthDay] = useState('')
+    const [sWeight, searchWeight] = useState('')
+    const [sSex, searchSex] = useState('')
+    const [sClientID, searchClientID] = useState('')
+
     const createPet = () => {
         Axios.post('http://localhost:3001/pets/insert', {
             name: name,
@@ -41,6 +50,22 @@ function PetsPage() {
             alert('successful insert');
         });
     };
+
+    const searchPets = () => {
+        Axios.get('http://localhost:3001/pets/search', {
+            name: sName,
+            species: sSpecies,
+            breed: sBreed,
+            birthYear: sBirthYear,
+            birthMonth: sBirthMonth,
+            birthDay: sBirthDay,
+            weight: sWeight,
+            sex: sSex,
+            clientID: sClientID
+        }).then(()=> {
+            alert('Search Complete')
+        })
+    }
 
     const deletePet = petID => {
         console.log(petID)
@@ -134,46 +159,68 @@ function PetsPage() {
                 <tbody>
                     <tr>
                         <td>Name:</td>
-                        <td><input type="text" name="petName" /></td>
-                        <td>Species:</td>
-                        <td><input type="text" name="petSpecies" /></td>
+                        <td><input type="text" name="name" onChange={((e)=> {
+                            searchName(e.target.value)
+                        })} /></td>
+                        <td>*Species:</td>
+                        <td><input type="text" name="species" onChange={((e)=> {
+                            searchSpecies(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Breed:</td>
-                        <td><input type="text" name="petBreed" /></td>
+                        <td><input type="text" name="breed" onChange={((e)=> {
+                            searchBreed(e.target.value)
+                        })} /></td>
                         <td>Birth Year:</td>
-                        <td><input type="number" name="petBirthYear" /></td>
+                        <td><input type="number" name="birthYear" onChange={((e)=> {
+                            searchBirthYear(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Birth month:</td>
-                        <td><input type="number" name="petBirthMonth" /></td>
+                        <td><input type="number" name="birthMonth" onChange={((e)=> {
+                            searchBirthMonth(e.target.value)
+                        })} /></td>
                         <td>Birth day:</td>
-                        <td><input type="number" name="petBirthDay" /></td>
+                        <td><input type="number" name="birthDay" onChange={((e)=> {
+                            searchBirthDay(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Weight:</td>
-                        <td><input type="number" name="petWeight" /></td>
-                        <td>Sex:</td>
+                        <td><input type="number" name="weight" onChange={((e)=> {
+                            searchWeight(e.target.value)
+                        })} /></td>
+                        <td>Sex:</td>                     
                         <td>
-                            <select id="petSex" name="petSex">
-                                <option></option>
+                            <select id="sex" name="sex" onChange= {((e)=> {
+                                searchSex(e.target.value)
+                            })}>
+                                <option disabled selected value></option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>Owner First Name:</td>
-                        <td><input type="text" name="petOwnerFName" /></td>
-                        <td>Owner Last Name:</td>
-                        <td><input type="text" name="petOwnerLName" /></td>
+                        <td>Owner ID:</td>
+                        <td><select id="clientID" name="clientID" onChange= {((e)=> {
+                            searchClientID(e.target.value)
+                        })}>
+                                <option hidden disabled selected value></option>
+                                {clientList.map((val) => {
+                                    return <option value={val.clientID}>{val.clientID}</option>
+                                })}
+                            </select>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            <button onClick={() => openTable(true)}>Search</button>
-            <button onClick={() => openTable(true)}>View All</button>
+            <button onClick={() => searchPets()}>Search</button>
+            <button>View All</button>
             <div>
-                    {showTable && <PetsTable pets={pets} deletePet={deletePet}/>}
+                    {<PetsTable pets={pets} deletePet={deletePet}/>}
             </div>
         </div>
     );

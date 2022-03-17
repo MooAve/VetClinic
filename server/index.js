@@ -33,6 +33,44 @@ app.get("/pets/get", (req, res) => {
     });
 });
 
+app.get("/pets/search", (req, res) => {
+
+    const name = req.body.name;
+    const species = req.body.species;
+    const breed = req.body.breed;
+    const birthYear = req.body.birthYear;
+    const birthMonth = req.body.birthMonth;
+    const birthDay = req.body.birthDay;
+    const weight = req.body.weight;
+    const sex = req.body.sex;
+    const clientID = req.body.clientID;
+
+    const sqlSearch = `SELECT 
+        name, 
+        species, 
+        breed, 
+        sex, 
+        birthYear, 
+        birthMonth, 
+        birthDay, 
+        weight 
+        FROM Pets WHERE
+        ? IS NULL OR name = ?
+        AND ? IS NULL OR species = ?
+        AND ? IS NULL OR breed = ?
+        AND ? IS NULL OR sex = ?
+        AND ? IS NULL OR birthYear = ?
+        AND ? IS NULL OR birthMonth = ?
+        AND ? IS NULL OR birthDay = ?
+        AND ? IS NULL OR weight = ?
+        AND ? IS NULL OR clientID = ?`
+
+    db.query(sqlSearch, [name, name, species, species, breed, breed, sex, sex, birthYear, birthYear,
+            birthMonth, birthMonth, birthDay, birthDay, weight, weight, clientID, clientID], (err, result) => {
+        res.send(result);
+    });
+});
+
 app.post("/pets/insert", (req, res) => {
     
     console.log(req.body.name);
