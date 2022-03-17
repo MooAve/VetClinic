@@ -24,7 +24,7 @@ function EditPetsPage() {
 
     const updatePet = () => {
         console.log(pet.petID)
-        Axios.put(`http://localhost:3001/pets/update/${pet.petID}`, {
+        Axios.put(`http://localhost:3001/pets/edit/${pet.petID}`, {
             name: name,
             species: species,
             breed: breed,
@@ -91,7 +91,7 @@ function EditPetsPage() {
                             <select id="sex" name="sex" defaultValue={sex} onChange= {((e)=> {
                                 setSex(e.target.value)
                             })}>
-                                <option hidden disabled selected></option>
+                                <option hidden defaultValue={true}>{sex}</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
