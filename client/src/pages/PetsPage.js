@@ -11,6 +11,7 @@ function PetsPage() {
         loadPets()
     }, []);
 
+    //Get data from 'Create' field
     const [name, setName] = useState('')
     const [species, setSpecies] = useState('')
     const [breed, setBreed] = useState('')
@@ -22,6 +23,7 @@ function PetsPage() {
     const [clientID, setClientID] = useState('')
     const [clientList, setClientList] = useState([])
 
+    //Get data from 'Search' field
     const [sName, searchName] = useState('')
     const [sSpecies, searchSpecies] = useState('')
     const [sBreed, searchBreed] = useState('')
@@ -32,6 +34,7 @@ function PetsPage() {
     const [sSex, searchSex] = useState('')
     const [sClientID, searchClientID] = useState('')
 
+    //
     const loadPets = () => {
         Axios.get('http://localhost:3001/pets/get').then((response) => {
             setPets(response.data)
@@ -50,8 +53,8 @@ function PetsPage() {
             sex: sex,
             clientID: clientID
         }).then(()=> {
-            console.log(clientID)
             alert('successful insert');
+            loadPets()
         });
     };
 
@@ -76,7 +79,8 @@ function PetsPage() {
         console.log(petID)
         Axios.delete(`http://localhost:3001/pets/${petID}`, {
         }).then(()=> {
-            alert("pet deleted")
+            alert(`Pet deleted`);
+            loadPets();
         });
     };
 
@@ -223,7 +227,7 @@ function PetsPage() {
                 </tbody>
             </table>
             <button onClick={() => searchPets()}>Search</button>
-            <button>View All</button>
+            <button onClick={() => loadPets()}>View All</button>
             <div>
                     {<PetsTable pets={pets} deletePet={deletePet}/>}
             </div>

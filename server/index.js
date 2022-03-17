@@ -34,8 +34,9 @@ app.get("/pets/get", (req, res) => {
 });
 
 app.post("/pets/search", (req, res) => {
-    
+
     const name = req.body.name;
+    console.log(name)
     const species = req.body.species;
     const breed = req.body.breed;
     const birthYear = req.body.birthYear;
@@ -55,15 +56,15 @@ app.post("/pets/search", (req, res) => {
         birthDay, 
         weight 
         FROM Pets WHERE
-        ? IS NULL OR name = ?
-        AND ? IS NULL OR species = ?
-        AND ? IS NULL OR breed = ?
-        AND ? IS NULL OR sex = ?
-        AND ? IS NULL OR birthYear = ?
-        AND ? IS NULL OR birthMonth = ?
-        AND ? IS NULL OR birthDay = ?
-        AND ? IS NULL OR weight = ?
-        AND ? IS NULL OR clientID = ?`
+        (? = '' OR name = ?)
+        AND (? = '' OR species = ?)
+        AND (? = '' OR breed = ?)
+        AND (? = '' OR sex = ?)
+        AND (? = '' OR birthYear = ?)
+        AND (? = '' OR birthMonth = ?)
+        AND (? = '' OR birthDay = ?)
+        AND (? = '' OR weight = ?)
+        AND (? = '' OR clientID = ?)`
 
     db.query(sqlSearch, [name, name, species, species, breed, breed, sex, sex, birthYear, birthYear,
             birthMonth, birthMonth, birthDay, birthDay, weight, weight, clientID, clientID], (err, result) => {
@@ -87,7 +88,8 @@ app.post("/pets/insert", (req, res) => {
 
     const sqlInsert = "INSERT INTO Pets (name, species, breed, birthYear, birthMonth, birthDay, weight, sex, clientID) VALUES (?,?,?,?,?,?,?,?,?)";
     db.query(sqlInsert, [name, species, breed, birthYear, birthMonth, birthDay, weight, sex, clientID], (err, result) => {
-        console.log(err);
+        if (err) console.log(err);
+        else res.send(result);
     });
 });
 
