@@ -33,8 +33,8 @@ app.get("/pets/get", (req, res) => {
     });
 });
 
-app.get("/pets/search", (req, res) => {
-
+app.post("/pets/search", (req, res) => {
+    
     const name = req.body.name;
     const species = req.body.species;
     const breed = req.body.breed;

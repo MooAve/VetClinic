@@ -8,9 +8,7 @@ function PetsPage() {
     const [pets, setPets] = useState([])
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/pets/get').then((response) => {
-            setPets(response.data)
-        });
+        loadPets()
     }, []);
 
     const [name, setName] = useState('')
@@ -34,6 +32,12 @@ function PetsPage() {
     const [sSex, searchSex] = useState('')
     const [sClientID, searchClientID] = useState('')
 
+    const loadPets = () => {
+        Axios.get('http://localhost:3001/pets/get').then((response) => {
+            setPets(response.data)
+        })
+    }
+
     const createPet = () => {
         Axios.post('http://localhost:3001/pets/insert', {
             name: name,
@@ -52,7 +56,7 @@ function PetsPage() {
     };
 
     const searchPets = () => {
-        Axios.get('http://localhost:3001/pets/search', {
+        Axios.post('http://localhost:3001/pets/search', {
             name: sName,
             species: sSpecies,
             breed: sBreed,
@@ -62,10 +66,11 @@ function PetsPage() {
             weight: sWeight,
             sex: sSex,
             clientID: sClientID
-        }).then(()=> {
+        }).then((response)=> {
+            setPets(response.data)
             alert('Search Complete')
-        })
-    }
+        });
+    };
 
     const deletePet = petID => {
         console.log(petID)
