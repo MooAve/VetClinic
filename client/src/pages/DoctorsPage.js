@@ -23,7 +23,7 @@ function DoctorsPage() {
     const [sPhone, searchPhone] = useState('')
     const [sEmail, searchEmail] = useState('')
 
-    //
+
     const loadDoctors = () => {
         Axios.get('http://localhost:3001/doctors/get').then((response) => {
             setDoctors(response.data)
@@ -31,15 +31,18 @@ function DoctorsPage() {
     }
 
     const createDoctor = () => {
-        Axios.post('http://localhost:3001/doctors/insert', {
-            fname: fname,
-            lname: lname,
-            phone: phone,
-            email: email
-        }).then(()=> {
-            alert('successful insert');
-            loadDoctors();
-        });
+        if (fname === '' || lname === '' || phone === '' || email === '') {
+            alert("Please fill out all required fields")
+        } else {
+            Axios.post('http://localhost:3001/doctors/insert', {
+                fname: fname,
+                lname: lname,
+                phone: phone,
+                email: email
+            }).then(()=> {
+                alert('successful insert');
+                loadDoctors();
+            })};
     };
 
     const searchDoctors = () => {
@@ -72,21 +75,21 @@ function DoctorsPage() {
                 <tbody>
                     <tr>
                         <td>*First Name:</td>
-                        <td><input type="text" name="doctorFName" onChange= {((e)=> {
+                        <td><input type="text" name="doctorFName" required onChange= {((e)=> {
                             setFName(e.target.value)
                         })} /></td>
                         <td>*Last Name:</td>
-                        <td><input type="text" name="doctorLName" onChange= {((e)=> {
+                        <td><input type="text" name="doctorLName" required onChange= {((e)=> {
                             setLName(e.target.value)
                         })} /></td>
                     </tr>
                     <tr>
                         <td>*Phone:</td>
-                        <td><input type="text" name="doctorPhone" onChange= {((e)=> {
+                        <td><input type="text" name="doctorPhone" required onChange= {((e)=> {
                             setPhone(e.target.value)
                         })} /></td>
                         <td>*Email:</td>
-                        <td><input type="text" name="doctorEmail" onChange= {((e)=> {
+                        <td><input type="text" name="doctorEmail" required onChange= {((e)=> {
                             setEmail(e.target.value)
                         })} /></td>
                     </tr>

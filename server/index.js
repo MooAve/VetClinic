@@ -107,7 +107,7 @@ app.post("/pets/insert", (req, res) => {
     const sex = req.body.sex;
     const clientID = req.body.clientID;
 
-    const sqlInsert = "INSERT INTO Pets (name, species, breed, birthYear, birthMonth, birthDay, weight, sex, clientID) VALUES (?,?,?,?,?,?,?,?,?)";
+    const sqlInsert = "INSERT INTO Pets (name, species, breed, birthYear, birthMonth, birthDay, weight, sex, clientID) VALUES VALUES (?,?,?,?, NULLIF(?, ''),NULLIF(?, ''), NULLIF(?, ''), ?,?)";
     db.query(sqlInsert, [name, species, breed, birthYear, birthMonth, birthDay, weight, sex, clientID], (err, result) => {
         if (err) console.log(err);
         else res.send(result);

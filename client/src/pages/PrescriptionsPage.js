@@ -36,16 +36,18 @@ function PrescriptionsPage() {
     }
 
     const createPrescription = () => {
-        Axios.post('http://localhost:3001/prescriptions/insert', {
-            date: date,
-            drug: drug,
-            dosage: dosage,
-            petID: petID,
-            doctorID: doctorID
-        }).then(()=> {
-            alert('successful insert');
-            loadPrescriptions();
-        });
+        if (date === '' || drug === '' || dosage === '' || petID === '' || doctorID === '') {
+            alert("Please fill out all required fields")
+        } else {
+            Axios.post('http://localhost:3001/prescriptions/insert', {
+                date: date,
+                drug: drug,
+                dosage: dosage,
+                petID: petID,
+                doctorID: doctorID
+            }).then(()=> {
+                loadPrescriptions();
+            })};
     };
 
     const searchPrescriptions = () => {
@@ -65,7 +67,6 @@ function PrescriptionsPage() {
         console.log(prescriptionID)
         Axios.delete(`http://localhost:3001/prescriptions/${prescriptionID}`, {
         }).then(()=> {
-            alert("prescription deleted")
             loadPrescriptions();
         });
     };
@@ -92,21 +93,21 @@ function PrescriptionsPage() {
                 <tbody>
                     <tr>
                         <td>*Date:</td>
-                        <td><input type="date" name="prescriptionDate" onChange= {((e)=> {
+                        <td><input type="date" name="prescriptionDate" required onChange= {((e)=> {
                             setDate(e.target.value)
                         })} /></td>
                         <td>*Drug Name:</td>
-                        <td><input type="text" name="prescriptionDrug" onChange= {((e)=> {
+                        <td><input type="text" name="prescriptionDrug" required onChange= {((e)=> {
                             setDrug(e.target.value)
                         })} /></td>
                     </tr>
                     <tr>
                         <td>*Dosage:</td>
-                        <td><input type="text" name="prescriptionDosage" onChange= {((e)=> {
+                        <td><input type="text" name="prescriptionDosage" required onChange= {((e)=> {
                             setDosage(e.target.value)
                         })} /></td>
                         <td>*Pet:</td>
-                        <td><select name="prescriptionPetID" onChange= {((e)=> {
+                        <td><select name="prescriptionPetID" required onChange= {((e)=> {
                             setPetID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>
@@ -118,7 +119,7 @@ function PrescriptionsPage() {
                     </tr>
                     <tr>
                         <td>*Doctor:</td>
-                        <td><select name="prescriptionDoctorID" onChange= {((e)=> {
+                        <td><select name="prescriptionDoctorID" required onChange= {((e)=> {
                             setDoctorID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>

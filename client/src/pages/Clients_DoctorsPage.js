@@ -32,13 +32,16 @@ function Clients_DoctorsPage() {
     }
 
     const createClients_Doctors = () => {
-        Axios.post('http://localhost:3001/clients_doctors/insert', {
-            clientID: clientID,
-            doctorID: doctorID
-        }).then(()=> {
-            alert('successful insert');
-            loadClients_Doctors();
-        });
+        if (clientID === '' || doctorID === '') {
+            alert("Please fill out all required fields")
+        } else {
+            Axios.post('http://localhost:3001/clients_doctors/insert', {
+                clientID: clientID,
+                doctorID: doctorID
+            }).then(()=> {
+                alert('successful insert');
+                loadClients_Doctors();
+        })};
     };
 
     const searchClients_Doctors = () => {

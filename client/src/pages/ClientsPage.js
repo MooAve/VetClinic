@@ -33,16 +33,19 @@ function ClientsPage() {
     }
 
     const createClient = () => {
-        Axios.post('http://localhost:3001/clients/insert', {
-            fname: fname,
-            lname: lname,
-            address: address,
-            phone: phone,
-            email: email
-        }).then(()=> {
-            alert('successful insert');
-            loadClients();
-        });
+        if (fname === '' || lname === '' || phone === '') {
+            alert("Please fill out all required fields")
+        } else {
+            Axios.post('http://localhost:3001/clients/insert', {
+                fname: fname,
+                lname: lname,
+                address: address,
+                phone: phone,
+                email: email
+            }).then(()=> {
+                alert('successful insert');
+                loadClients();
+        })};
     };
 
     const searchClients = () => {

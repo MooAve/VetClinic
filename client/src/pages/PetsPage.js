@@ -35,7 +35,6 @@ function PetsPage() {
     const [sClientFName, searchClientFName] = useState('')
     const [sClientLName, searchClientLName] = useState('')
 
-    //
     const loadPets = () => {
         Axios.get('http://localhost:3001/pets/get').then((response) => {
             setPets(response.data)
@@ -43,19 +42,23 @@ function PetsPage() {
     }
 
     const createPet = () => {
-        Axios.post('http://localhost:3001/pets/insert', {
-            name: name,
-            species: species,
-            breed: breed,
-            birthYear: birthYear,
-            birthMonth: birthMonth,
-            birthDay: birthDay,
-            weight: weight,
-            sex: sex,
-            clientID: clientID
-        }).then(()=> {
-            loadPets();
-        });
+        if (species === '' || birthYear === '' || sex === '' || clientID === '') {
+            alert("Please fill out all required fields")
+        }
+        else {
+            Axios.post('http://localhost:3001/pets/insert', {
+                name: name,
+                species: species,
+                breed: breed,
+                birthYear: birthYear,
+                birthMonth: birthMonth,
+                birthDay: birthDay,
+                weight: weight,
+                sex: sex,
+                clientID: clientID
+            }).then(()=> {
+                loadPets();
+            })};
     };
 
     const searchPets = () => {
@@ -103,7 +106,7 @@ function PetsPage() {
                             setName(e.target.value)
                         })} /></td>
                         <td>*Species:</td>
-                        <td><input type="text" name="species" required onChange={((e)=> {
+                        <td><input type="text" name="species" onChange={((e)=> {
                             setSpecies(e.target.value)
                         })} /></td>
                     </tr>
@@ -113,7 +116,7 @@ function PetsPage() {
                             setBreed(e.target.value)
                         })} /></td>
                         <td>*Birth Year:</td>
-                        <td><input type="number" name="birthYear" required onChange={((e)=> {
+                        <td><input type="number" name="birthYear" onChange={((e)=> {
                             setBirthYear(e.target.value)
                         })} /></td>
                     </tr>
@@ -134,7 +137,7 @@ function PetsPage() {
                         })} /></td>
                         <td>*Sex:</td>                     
                         <td>
-                            <select id="sex" name="sex" required onChange= {((e)=> {
+                            <select id="sex" name="sex" onChange= {((e)=> {
                                 setSex(e.target.value)
                             })}>
                                 <option hidden disabled selected value></option>
@@ -145,7 +148,7 @@ function PetsPage() {
                     </tr>
                     <tr>
                         <td>*Client:</td>
-                        <td><select id="clientID" name="clientID" required onChange= {((e)=> {
+                        <td><select id="clientID" name="clientID" onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>
