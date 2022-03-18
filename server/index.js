@@ -378,6 +378,24 @@ app.get("/clients_doctors/get", (req, res) => {
     });
 });
 
+app.post("/clients_doctors/search", (req, res) => {
+    
+    const clientID = req.body.clientID;
+    const doctorID = req.body.doctorID;
+
+    const sqlSearch = `SELECT 
+        clientID,
+        doctorID
+        FROM Clients_Doctors WHERE
+        (? = '' OR clientID = ?)
+        AND (? = '' OR doctorID = ?)`
+
+    db.query(sqlSearch, [clientID, clientID, doctorID, doctorID], (err, result) => {
+        if (err) console.log(err);
+        else res.send(result);
+    });
+});
+
 app.post("/clients_doctors/insert", (req, res) => {
     console.log(req.body.clientID);
 

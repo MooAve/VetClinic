@@ -5,19 +5,29 @@ import CDTable from '../components/ClientsDoctorsTable';
 
 function Clients_DoctorsPage() {
 
-    const [showTable, openTable] = useState(false)
     const [clients_doctors, setClients_Doctors] = useState([])
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/clients_doctors/get').then((response) => {
-            setClients_Doctors(response.data)
-        });
+        loadClients_Doctors();
     }, []);
 
+    //Get data from 'Create' field
     const [clientID, setClientID] = useState('')
     const [doctorID, setDoctorID] = useState('')
     const [clientList, setClientList] = useState([])
     const [doctorList, setDoctorList] = useState([])
+
+    //Get data from 'Search' field
+    const [sClientID, searchClientID] = useState('')
+    const [sDoctorID, searchDoctorID] = useState('')
+
+
+    //
+    const loadClients_Doctors = () => {
+        Axios.get('http://localhost:3001/clients_doctors/get').then((response) => {
+            setClients_Doctors(response.data)
+        });
+    }
 
     const createClients_Doctors = () => {
         Axios.post('http://localhost:3001/clients_doctors/insert', {
@@ -25,6 +35,17 @@ function Clients_DoctorsPage() {
             doctorID: doctorID
         }).then(()=> {
             alert('successful insert');
+            loadClients_Doctors();
+        });
+    };
+
+    const searchClients_Doctors = () => {
+        Axios.post('http://localhost:3001/clients_doctors/search', {
+            clientID: sClientID,
+            doctorID: sDoctorID
+        }).then((response)=> {
+            setClients_Doctors(response.data)
+            alert('Search Complete')
         });
     };
 
@@ -32,7 +53,8 @@ function Clients_DoctorsPage() {
         console.log(clientID, doctorID)
         Axios.delete(`http://localhost:3001/clients_doctors/${clientID}/${doctorID}`, {
         }).then(()=> {
-            alert("clients_doctors relationship deleted")
+            alert("clients_doctors relationship deleted");
+            loadClients_Doctors();
         });
     };
 
@@ -91,23 +113,21 @@ function Clients_DoctorsPage() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Client First Name:</td>
-                        <td><input type="text" name="cdClientFName" /></td>
-                        <td>Client Last Name:</td>
-                        <td><input type="text" name="cdClientLName" /></td>
-                    </tr>
-                    <tr>
-                        <td>Dr. First Name:</td>
-                        <td><input type="text" name="cdDoctorFName" /></td>
-                        <td>Dr. Last Name:</td>
-                        <td><input type="text" name="cdDoctorLName" /></td>
+                        <td>Client ID:</td>
+                        <td><input type="text" name="clientID" onChange={((e)=> {
+                            searchClientID(e.target.value)
+                        })} /></td>
+                        <td>Doctor ID:</td>
+                        <td><input type="text" name="doctorID" onChange={((e)=> {
+                            searchDoctorID(e.target.value)
+                        })} /></td>
                     </tr>
                 </tbody>
             </table>
-            <button onClick={() => openTable(true)}>Search</button>
-            <button onClick={() => openTable(true)}>View All</button>
+            <button onClick={() => searchClients_Doctors()}>Search</button>
+            <button onClick={() => loadClients_Doctors()}>View All</button>
             <div>
-                {showTable && <CDTable clients_doctors={clients_doctors} deleteClientDoctor={deleteClientDoctor} />}
+                {<CDTable clients_doctors={clients_doctors} deleteClientDoctor={deleteClientDoctor} />}
             </div>
         </div>
     );
