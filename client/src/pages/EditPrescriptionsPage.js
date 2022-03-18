@@ -25,18 +25,21 @@ function EditPrescriptionsPage() {
     console.log(prescription.doctorID)
 
     const updatePrescription = () => {
-        console.log(prescription.prescriptionID)
-        Axios.put(`http://localhost:3001/prescriptions/edit/${prescription.prescriptionID}`, {
-            date: date,
-            drug: drug,
-            dosage: dosage,
-            petID: petID,
-            doctorID: doctorID
-        }).then(() => {
-            alert("Successfully updated prescription!")
-            navigate('/Prescriptions')
-        })
-    }
+        if (date === '' || drug === '' || dosage === '' || petID === '' || doctorID === '') {
+            alert("Please fill out all required fields")
+            } else {
+            Axios.put(`http://localhost:3001/prescriptions/edit/${prescription.prescriptionID}`, {
+                date: date,
+                drug: drug,
+                dosage: dosage,
+                petID: petID,
+                doctorID: doctorID
+            }).then(() => {
+                alert("Successfully updated prescription!")
+                navigate('/Prescriptions')
+            });
+        };
+    };
 
     useEffect(() => {
         Axios.get('http://localhost:3001/pets/get').then((response) => {

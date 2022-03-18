@@ -18,16 +18,20 @@ function EditClientsPage() {
     const [email, setEmail] = useState(client.email)
 
     const editClient = () => {
-        Axios.put(`http://localhost:3001/clients/edit/${client.clientID}`, {
-            fname: fname,
-            lname: lname,
-            address: address,
-            phone: phone,
-            email: email
-        }).then(()=> {
-            alert('Successfully updated client!');
-            navigate('/Clients')
-        });
+        if (fname === '' || lname === '' || phone === '') {
+            alert("Please fill out all required fields")
+        } else {
+            Axios.put(`http://localhost:3001/clients/edit/${client.clientID}`, {
+                fname: fname,
+                lname: lname,
+                address: address,
+                phone: phone,
+                email: email
+            }).then(()=> {
+                alert('Successfully updated client!');
+                navigate('/Clients')
+            });
+        };
     };
 
     return (

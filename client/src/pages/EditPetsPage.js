@@ -24,21 +24,25 @@ function EditPetsPage() {
     const [clientList, setClientList] = useState([])
 
     const updatePet = () => {
-        console.log(pet.petID)
-        Axios.put(`http://localhost:3001/pets/edit/${pet.petID}`, {
-            name: name,
-            species: species,
-            breed: breed,
-            birthYear: birthYear,
-            birthMonth: birthMonth,
-            birthDay: birthDay,
-            weight: weight,
-            sex: sex,
-            clientID: clientID
-        }).then(()=> {
-            alert("Successfully updated pet!")
-            navigate('/Pets')
-        });
+        if (species === '' || birthYear === '' || sex === '' || clientID === '') {
+            alert("Please fill out all required fields")
+        }
+        else {
+            Axios.put(`http://localhost:3001/pets/edit/${pet.petID}`, {
+                name: name,
+                species: species,
+                breed: breed,
+                birthYear: birthYear,
+                birthMonth: birthMonth,
+                birthDay: birthDay,
+                weight: weight,
+                sex: sex,
+                clientID: clientID
+            }).then(()=> {
+                alert("Successfully updated pet!")
+                navigate('/Pets')
+            });
+        };
     };
 
     useEffect(() => {

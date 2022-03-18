@@ -17,15 +17,19 @@ function EditDoctorsPage() {
     const [email, setEmail] = useState(doctor.email)
 
     const updateDoctor = () => {
-        Axios.put(`http://localhost:3001/doctors/edit/${doctor.doctorID}`, {
-            fname: fname,
-            lname: lname,
-            phone: phone,
-            email: email
-        }).then(()=> {
-            alert("Successfully updated doctor!");
-            navigate("/Doctors");
-        });
+        if (fname === '' || lname === '' || phone === '' || email === '') {
+            alert("Please fill out all required fields")
+        } else {
+            Axios.put(`http://localhost:3001/doctors/edit/${doctor.doctorID}`, {
+                fname: fname,
+                lname: lname,
+                phone: phone,
+                email: email
+            }).then(()=> {
+                alert("Successfully updated doctor!");
+                navigate("/Doctors");
+            });
+        };
     };
 
     return (
