@@ -232,12 +232,14 @@ app.delete("/clients/:id", (req, res) => {
 
 app.get("/prescriptions/get", (req, res) => {
     const sqlSelect = `SELECT
-        prescriptionID,
-        date,
-        drug,
-        dosage,
-        CONCAT(Pets.name, " (", Pets.petID, ")") AS pet,
-        CONCAT(Doctors.fname, " ", Doctors.lname) AS doctor
+    prescriptionID,
+    Prescriptions.petID,
+    Prescriptions.doctorID,
+    date,
+    drug,
+    dosage,
+    CONCAT(Pets.name, " (", Pets.petID, ")") AS pet,
+    CONCAT(Doctors.fname, " ", Doctors.lname) AS doctor
     FROM Prescriptions
     INNER JOIN Pets
     ON Pets.petID = Prescriptions.petID

@@ -15,11 +15,17 @@ function EditPrescriptionsPage() {
     const [drug, setDrug] = useState(prescription.drug)
     const [dosage, setDosage] = useState(prescription.dosage)
     const [petID, setPetID] = useState(prescription.petID)
+    const [pet, setPet] = useState(prescription.pet)
     const [doctorID, setDoctorID] = useState(prescription.doctorID)
+    const [doctor, setDoctor] = useState(prescription.doctor)
     const [petList, setPetList] = useState([])
     const [doctorList, setDoctorList] = useState([])
 
+    console.log(prescription.petID)
+    console.log(prescription.doctorID)
+
     const updatePrescription = () => {
+        console.log(prescription.prescriptionID)
         Axios.put(`http://localhost:3001/prescriptions/edit/${prescription.prescriptionID}`, {
             date: date,
             drug: drug,
@@ -30,9 +36,8 @@ function EditPrescriptionsPage() {
             alert("Successfully updated prescription!")
             navigate('/Prescriptions')
         })
-
-
     }
+
     useEffect(() => {
         Axios.get('http://localhost:3001/pets/get').then((response) => {
             setPetList(response.data)
@@ -62,28 +67,28 @@ function EditPrescriptionsPage() {
                     </tr>
                     <tr>
                         <td>*Dosage:</td>
-                        <td><input type="text" name="prescriptionDosage" defaultValue={dosage} onChange= {((e)=> {
+                        <td><input type="text" name="dosage" defaultValue={dosage} onChange= {((e)=> {
                             setDosage(e.target.value)
                         })} /></td>
-                        <td>*Pet ID:</td>
-                        <td><select name="prescriptionPetID" defaultValue={petID} onChange= {((e)=> {
+                        <td>*Pet:</td>
+                        <td><select id="petID" name="petID" required onChange= {((e)=> {
                             setPetID(e.target.value)
                         })}>
-                                <option hidden defaultValue={true}>{petID}</option>
+                                <option hidden defaultValue={petID}>{pet}</option>
                                 {petList.map((val) => {
-                                    return <option value={val.petID}>{val.petID}</option>
+                                    return <option value={val.petID}>{val.name.concat(" (", val.petID, ")")}</option>
                                 })}
                             </select> 
                         </td>
                     </tr>
                     <tr>
-                        <td>*Doctor ID:</td>
-                        <td><select name="prescriptionDoctorID" defaultValue={doctorID} onChange= {((e)=> {
+                        <td>*Doctor:</td>
+                        <td><select id="doctorID" name="doctorID" required onChange= {((e)=> {
                             setDoctorID(e.target.value)
                         })}>
-                                <option hidden defaultValue={true}>{doctorID}</option>
+                                <option hidden defaultValue={doctorID}>{doctor}</option>
                                 {doctorList.map((val) => {
-                                    return <option value={val.doctorID}>{val.doctorID}</option>
+                                    return <option value={val.doctorID}>{val.fname.concat(" ", val.lname)}</option>
                                 })}
                             </select>
                         </td>

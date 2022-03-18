@@ -20,6 +20,7 @@ function EditPetsPage() {
     const [weight, setWeight] = useState(pet.weight)
     const [sex, setSex] = useState(pet.sex)
     const [clientID, setClientID] = useState(pet.clientID)
+    const [client, setClient] = useState(pet.client)
     const [clientList, setClientList] = useState([])
 
     const updatePet = () => {
@@ -88,10 +89,10 @@ function EditPetsPage() {
                         })} /></td>
                         <td>*Sex:</td>                     
                         <td>
-                            <select id="sex" name="sex" required defaultValue={sex} onChange= {((e)=> {
+                            <select id="sex" name="sex" required onChange= {((e)=> {
                                 setSex(e.target.value)
                             })}>
-                                <option hidden defaultValue={true}>{sex}</option>
+                                <option hidden defaultValue={sex}>{sex}</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -102,7 +103,7 @@ function EditPetsPage() {
                         <td><select id="clientID" name="clientID" required onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
-                                <option hidden disabled selected value></option>
+                                <option hidden defaultValue={clientID}>{client}</option>
                                 {clientList.map((val) => {
                                     return <option value={val.clientID}>{val.fname.concat(" ", val.lname)}</option>
                                 })}
