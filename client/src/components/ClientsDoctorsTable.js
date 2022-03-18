@@ -7,8 +7,8 @@ function CDTable( {clients_doctors, deleteClientDoctor} ) {
         <table class="displayTable">
             <caption>Clients-Doctors</caption>
             <thead>
-                <th>clientID</th>
-                <th>doctorID</th>
+                <th>Client</th>
+                <th>Doctor</th>
                 <th>Delete</th>
             </thead>
             <tbody>

@@ -385,7 +385,14 @@ app.delete("/doctors/:id", (req, res) => {
 //-------------------------
 
 app.get("/clients_doctors/get", (req, res) => {
-    const sqlSelect = "SELECT * FROM Clients_Doctors";
+    const sqlSelect = `SELECT
+    Clients_Doctors.clientID,
+    CONCAT(Clients.fname, " ", Clients.lname) AS client,
+    Clients_Doctors.doctorID,
+    CONCAT(Doctors.fname, " ", Doctors.lname) AS doctor
+    FROM Clients_Doctors
+    INNER JOIN Clients ON Clients_Doctors.clientID = Clients.clientID
+    INNER JOIN Doctors ON Clients_Doctors.doctorID = Doctors.doctorID`;
     db.query(sqlSelect, (err, result) => {
         if (err) console.log(err);
         else res.send(result);

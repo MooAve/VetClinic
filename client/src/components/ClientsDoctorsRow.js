@@ -13,8 +13,8 @@ function ClientsDoctorsRow({clientDoctor, deleteClientDoctor}) {
 
     return(
         <tr>
-            <td>{clientDoctor.clientID}</td>
-            <td>{clientDoctor.doctorID}</td>
+            <td>{clientDoctor.client}</td>
+            <td>{clientDoctor.doctor}</td>
 
             <td><GrFormTrash onClick={ () => confirmDelete()} /></td>
         </tr>
