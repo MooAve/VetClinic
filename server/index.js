@@ -58,7 +58,8 @@ app.post("/pets/search", (req, res) => {
     const birthDay = req.body.birthDay;
     const weight = req.body.weight;
     const sex = req.body.sex;
-    const clientID = req.body.clientID;
+    const clientfname = req.body.clientfname
+    const clientlname = req.body.clientlname
 
     const sqlSearch = `SELECT
             petID, 
@@ -84,10 +85,12 @@ app.post("/pets/search", (req, res) => {
             AND (? = '' OR birthMonth = ?)
             AND (? = '' OR birthDay = ?)
             AND (? = '' OR weight = ?)
-            AND (? = '' OR Pets.clientID = ?)`
+            AND (? = '' OR Clients.fname = ?)
+            AND (? = '' OR Clients.lname = ?)`
 
     db.query(sqlSearch, [name, name, species, species, breed, breed, sex, sex, birthYear, birthYear,
-            birthMonth, birthMonth, birthDay, birthDay, weight, weight, clientID, clientID], (err, result) => {
+            birthMonth, birthMonth, birthDay, birthDay, weight, weight, clientfname, clientfname, clientlname, clientlname], 
+            (err, result) => {
                 if (err) console.log(err);
                 else res.send(result);
     });

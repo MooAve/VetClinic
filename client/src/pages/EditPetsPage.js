@@ -57,7 +57,7 @@ function EditPetsPage() {
                             setName(e.target.value)
                         })} /></td>
                         <td>*Species:</td>
-                        <td><input type="text" name="species" defaultValue={species} onChange={((e)=> {
+                        <td><input type="text" name="species" required defaultValue={species} onChange={((e)=> {
                             setSpecies(e.target.value)
                         })} /></td>
                     </tr>
@@ -67,7 +67,7 @@ function EditPetsPage() {
                             setBreed(e.target.value)
                         })} /></td>
                         <td>*Birth Year:</td>
-                        <td><input type="number" name="birthYear" defaultValue={birthYear} onChange={((e)=> {
+                        <td><input type="number" name="birthYear" required defaultValue={birthYear} onChange={((e)=> {
                             setBirthYear(e.target.value)
                         })} /></td>
                     </tr>
@@ -88,7 +88,7 @@ function EditPetsPage() {
                         })} /></td>
                         <td>*Sex:</td>                     
                         <td>
-                            <select id="sex" name="sex" defaultValue={sex} onChange= {((e)=> {
+                            <select id="sex" name="sex" required defaultValue={sex} onChange= {((e)=> {
                                 setSex(e.target.value)
                             })}>
                                 <option hidden defaultValue={true}>{sex}</option>
@@ -98,13 +98,13 @@ function EditPetsPage() {
                         </td>
                     </tr>
                     <tr>
-                        <td>*Owner ID:</td>
-                        <td><select id="clientID" name="clientID" defaultValue={clientID} onChange= {((e)=> {
+                        <td>*Client:</td>
+                        <td><select id="clientID" name="clientID" required onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
-                                <option hidden defaultValue={true}>{clientID}</option>
+                                <option hidden disabled selected value></option>
                                 {clientList.map((val) => {
-                                    return <option value={val.clientID}>{val.clientID}</option>
+                                    return <option value={val.clientID}>{val.fname.concat(" ", val.lname)}</option>
                                 })}
                             </select>
                         </td>

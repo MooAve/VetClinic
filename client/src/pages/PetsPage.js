@@ -32,7 +32,8 @@ function PetsPage() {
     const [sBirthDay, searchBirthDay] = useState('')
     const [sWeight, searchWeight] = useState('')
     const [sSex, searchSex] = useState('')
-    const [sClientID, searchClientID] = useState('')
+    const [sClientFName, searchClientFName] = useState('')
+    const [sClientLName, searchClientLName] = useState('')
 
     //
     const loadPets = () => {
@@ -53,7 +54,6 @@ function PetsPage() {
             sex: sex,
             clientID: clientID
         }).then(()=> {
-            alert('successful insert');
             loadPets();
         });
     };
@@ -68,10 +68,10 @@ function PetsPage() {
             birthDay: sBirthDay,
             weight: sWeight,
             sex: sSex,
-            clientID: sClientID
+            clientfname: sClientFName,
+            clientlname: sClientLName
         }).then((response)=> {
             setPets(response.data)
-            alert('Search Complete')
         });
     };
 
@@ -79,7 +79,6 @@ function PetsPage() {
         console.log(petID)
         Axios.delete(`http://localhost:3001/pets/${petID}`, {
         }).then(()=> {
-            alert(`Pet deleted`);
             loadPets();
         });
     };
@@ -104,7 +103,7 @@ function PetsPage() {
                             setName(e.target.value)
                         })} /></td>
                         <td>*Species:</td>
-                        <td><input type="text" name="species" onChange={((e)=> {
+                        <td><input type="text" name="species" required onChange={((e)=> {
                             setSpecies(e.target.value)
                         })} /></td>
                     </tr>
@@ -114,7 +113,7 @@ function PetsPage() {
                             setBreed(e.target.value)
                         })} /></td>
                         <td>*Birth Year:</td>
-                        <td><input type="number" name="birthYear" onChange={((e)=> {
+                        <td><input type="number" name="birthYear" required onChange={((e)=> {
                             setBirthYear(e.target.value)
                         })} /></td>
                     </tr>
@@ -135,23 +134,23 @@ function PetsPage() {
                         })} /></td>
                         <td>*Sex:</td>                     
                         <td>
-                            <select id="sex" name="sex" onChange= {((e)=> {
+                            <select id="sex" name="sex" required onChange= {((e)=> {
                                 setSex(e.target.value)
                             })}>
                                 <option hidden disabled selected value></option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>*Owner ID:</td>
-                        <td><select id="clientID" name="clientID" onChange= {((e)=> {
+                        <td>*Client:</td>
+                        <td><select id="clientID" name="clientID" required onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>
                                 {clientList.map((val) => {
-                                    return <option value={val.clientID}>{val.clientID}</option>
+                                    return <option value={val.clientID}>{val.fname.concat(" ", val.lname)}</option>
                                 })}
                             </select>
                         </td>
@@ -207,22 +206,21 @@ function PetsPage() {
                                 searchSex(e.target.value)
                             })}>
                                 <option disabled selected value></option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>Owner ID:</td>
-                        <td><select id="clientID" name="clientID" onChange= {((e)=> {
-                            searchClientID(e.target.value)
-                        })}>
-                                <option hidden disabled selected value></option>
-                                {clientList.map((val) => {
-                                    return <option value={val.clientID}>{val.clientID}</option>
-                                })}
-                            </select>
-                        </td>
+                    <td>Client First Name:</td>
+                        <td><input type="text" name="cFName" onChange={((e)=> {
+                            searchClientFName(e.target.value)
+                        })} /></td>
+
+                    <td>Client Last Name:</td>
+                        <td><input type="text" name="cLName" onChange={((e)=> {
+                            searchClientLName(e.target.value)
+                        })} /></td>
                     </tr>
                 </tbody>
             </table>
