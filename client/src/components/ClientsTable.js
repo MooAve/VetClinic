@@ -17,7 +17,7 @@ function ClientsTable( {clients, deleteClient} ) {
             </thead>
             <tbody>
                 {clients.map((client, i) => <ClientsRow client={client} 
-                        deleteClient={deleteClient} /* EditClient={EditClient}*/ key={i} />)}
+                        deleteClient={deleteClient} key={i} />)}
             </tbody>
         </table>
     );

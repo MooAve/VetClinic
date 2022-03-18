@@ -5,19 +5,30 @@ import DoctorsTable from '../components/DoctorsTable.js';
 
 function DoctorsPage() {
 
-    const [showTable, openTable] = useState(false)
     const [doctors, setDoctors] = useState([])
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/doctors/get').then((response) => {
-            setDoctors(response.data)
-        });
+        loadDoctors();
     }, []);
 
+    //Get data from 'Create' field
     const [fname, setFName] = useState('')
     const [lname, setLName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+
+    //Get data from 'Search' field
+    const [sFname, searchFname] = useState('')
+    const [sLname, searchLname] = useState('')
+    const [sPhone, searchPhone] = useState('')
+    const [sEmail, searchEmail] = useState('')
+
+    //
+    const loadDoctors = () => {
+        Axios.get('http://localhost:3001/doctors/get').then((response) => {
+            setDoctors(response.data)
+        });
+    }
 
     const createDoctor = () => {
         Axios.post('http://localhost:3001/doctors/insert', {
@@ -27,14 +38,29 @@ function DoctorsPage() {
             email: email
         }).then(()=> {
             alert('successful insert');
+            loadDoctors();
         });
     };
+
+    const searchDoctors = () => {
+        Axios.post('http://localhost:3001/doctors/search', {
+            fname: sFname,
+            lname: sLname,
+            phone: sPhone,
+            email: sEmail
+        }).then((response)=> {
+            setDoctors(response.data)
+            alert('Search Complete')
+        });
+    };
+
 
     const deleteDoctor = doctorID => {
         console.log(doctorID)
         Axios.delete(`http://localhost:3001/doctors/${doctorID}`, {
         }).then(()=> {
-            alert("doctor deleted")
+            alert("doctor deleted");
+            loadDoctors();
         });
     };
 
@@ -78,22 +104,30 @@ function DoctorsPage() {
                 <tbody>
                     <tr>
                         <td>First Name:</td>
-                        <td><input type="text" name="doctorFName" /></td>
+                        <td><input type="text" name="doctorFName" onChange={((e)=> {
+                            searchFname(e.target.value)
+                        })} /></td>
                         <td>Last Name:</td>
-                        <td><input type="text" name="doctorLName" /></td>
+                        <td><input type="text" name="doctorLName" onChange={((e)=> {
+                            searchLname(e.target.value)
+                        })} /></td>
                     </tr>
                     <tr>
                         <td>Phone:</td>
-                        <td><input type="text" name="doctorPhone" /></td>
+                        <td><input type="text" name="doctorPhone" onChange={((e)=> {
+                            searchPhone(e.target.value)
+                        })} /></td>
                         <td>Email:</td>
-                        <td><input type="text" name="doctorEmail" /></td>
+                        <td><input type="text" name="doctorEmail" onChange={((e)=> {
+                            searchEmail(e.target.value)
+                        })} /></td>
                     </tr>
                 </tbody>
             </table>
-            <button onClick={() => openTable(true)}>Search</button>
-            <button onClick={() => openTable(true)}>View All</button>
+            <button onClick={() => searchDoctors()}>Search</button>
+            <button onClick={() => loadDoctors()}>View All</button>
             <div>
-                    {showTable && <DoctorsTable doctors={doctors} deleteDoctor={deleteDoctor} />}
+                    {<DoctorsTable doctors={doctors} deleteDoctor={deleteDoctor} />}
             </div>
         </div>
     );
