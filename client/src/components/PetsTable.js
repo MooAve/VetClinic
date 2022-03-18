@@ -15,7 +15,7 @@ function PetsTable( {pets, deletePet} ) {
                 <th>Birth Day</th>
                 <th>Weight</th>
                 <th>Sex</th>
-                <th>Owner</th>
+                <th>Client</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </thead>

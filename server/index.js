@@ -27,7 +27,21 @@ app.get("/",(req, res) => {
 //-------------------------
 
 app.get("/pets/get", (req, res) => {
-    const sqlSelect = "SELECT * FROM Pets";
+    const sqlSelect = `SELECT
+    petID,
+    Pets.clientID,
+    name, 
+    species, 
+    breed, 
+    sex, 
+    birthYear, 
+    birthMonth, 
+    birthDay, 
+    weight, 
+    CONCAT(Clients.fname, " ", Clients.lname) AS client
+    FROM Pets 
+    INNER JOIN Clients
+    ON Pets.clientID = Clients.clientID`;
     db.query(sqlSelect, (err, result) => {
         if (err) console.log(err);
         else res.send(result);
@@ -37,7 +51,6 @@ app.get("/pets/get", (req, res) => {
 app.post("/pets/search", (req, res) => {
 
     const name = req.body.name;
-    console.log(name)
     const species = req.body.species;
     const breed = req.body.breed;
     const birthYear = req.body.birthYear;
@@ -48,26 +61,30 @@ app.post("/pets/search", (req, res) => {
     const clientID = req.body.clientID;
 
     const sqlSearch = `SELECT
-        petID, 
-        name, 
-        species, 
-        breed, 
-        sex, 
-        birthYear, 
-        birthMonth, 
-        birthDay, 
-        weight,
-        clientID 
-        FROM Pets WHERE
-        (? = '' OR name = ?)
-        AND (? = '' OR species = ?)
-        AND (? = '' OR breed = ?)
-        AND (? = '' OR sex = ?)
-        AND (? = '' OR birthYear = ?)
-        AND (? = '' OR birthMonth = ?)
-        AND (? = '' OR birthDay = ?)
-        AND (? = '' OR weight = ?)
-        AND (? = '' OR clientID = ?)`
+            petID, 
+            Pets.clientID,        
+            name, 
+            species, 
+            breed, 
+            sex, 
+            birthYear, 
+            birthMonth, 
+            birthDay, 
+            weight,
+            CONCAT(Clients.fname, " ", Clients.lname) AS client
+        FROM Pets 
+        INNER JOIN Clients
+        ON Pets.clientID = Clients.clientID
+        WHERE
+            (? = '' OR name = ?)
+            AND (? = '' OR species = ?)
+            AND (? = '' OR breed = ?)
+            AND (? = '' OR sex = ?)
+            AND (? = '' OR birthYear = ?)
+            AND (? = '' OR birthMonth = ?)
+            AND (? = '' OR birthDay = ?)
+            AND (? = '' OR weight = ?)
+            AND (? = '' OR Pets.clientID = ?)`
 
     db.query(sqlSearch, [name, name, species, species, breed, breed, sex, sex, birthYear, birthYear,
             birthMonth, birthMonth, birthDay, birthDay, weight, weight, clientID, clientID], (err, result) => {
@@ -77,9 +94,6 @@ app.post("/pets/search", (req, res) => {
 });
 
 app.post("/pets/insert", (req, res) => {
-    
-    console.log(req.body.name);
-
     const name = req.body.name;
     const species = req.body.species;
     const breed = req.body.breed;

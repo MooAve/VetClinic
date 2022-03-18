@@ -171,7 +171,7 @@ function PetsPage() {
                         <td><input type="text" name="name" onChange={((e)=> {
                             searchName(e.target.value)
                         })} /></td>
-                        <td>*Species:</td>
+                        <td>Species:</td>
                         <td><input type="text" name="species" onChange={((e)=> {
                             searchSpecies(e.target.value)
                         })} /></td>

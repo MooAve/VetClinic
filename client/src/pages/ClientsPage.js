@@ -62,7 +62,6 @@ function ClientsPage() {
         console.log(clientID)
         Axios.delete(`http://localhost:3001/clients/${clientID}`, {
         }).then(()=> {
-            alert("Client deleted");
             loadClients();
         });
     };

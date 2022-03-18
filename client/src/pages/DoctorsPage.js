@@ -59,7 +59,6 @@ function DoctorsPage() {
         console.log(doctorID)
         Axios.delete(`http://localhost:3001/doctors/${doctorID}`, {
         }).then(()=> {
-            alert("doctor deleted");
             loadDoctors();
         });
     };
