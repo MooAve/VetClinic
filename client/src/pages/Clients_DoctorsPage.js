@@ -18,8 +18,10 @@ function Clients_DoctorsPage() {
     const [doctorList, setDoctorList] = useState([])
 
     //Get data from 'Search' field
-    const [sClientID, searchClientID] = useState('')
-    const [sDoctorID, searchDoctorID] = useState('')
+    const [sClientFname, searchClientFname] = useState('')
+    const [sClientLname, searchClientLname] = useState('')
+    const [sDoctorFname, searchDoctorFname] = useState('')
+    const [sDoctorLname, searchDoctorLname] = useState('')
 
 
     //
@@ -41,8 +43,10 @@ function Clients_DoctorsPage() {
 
     const searchClients_Doctors = () => {
         Axios.post('http://localhost:3001/clients_doctors/search', {
-            clientID: sClientID,
-            doctorID: sDoctorID
+            clientFname: sClientFname,
+            clientLname: sClientLname,
+            doctorFname: sDoctorFname,
+            doctorLname: sDoctorLname
         }).then((response)=> {
             setClients_Doctors(response.data)
             alert('Search Complete')
@@ -79,25 +83,25 @@ function Clients_DoctorsPage() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>*Client ID:</td>
+                        <td>*Client:</td>
                         <td><select name="cdClientID" onChange= {((e)=> {
                             setClientID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>
                                 {clientList.map((val) => {
-                                    return <option value={val.clientID}>{val.clientID}</option>
+                                    return <option value={val.clientID}>{val.fname.concat(" ", val.lname)}</option>
                                 })}
                             </select> 
                         </td>
                     </tr>
                     <tr>
-                        <td>*Doctor ID:</td>
+                        <td>*Doctor:</td>
                         <td><select name="cdDoctorID" onChange= {((e)=> {
                             setDoctorID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>
                                 {doctorList.map((val) => {
-                                    return <option value={val.doctorID}>{val.doctorID}</option>
+                                    return <option value={val.doctorID}>{val.fname.concat(" ", val.lname)}</option>
                                 })}
                             </select>
                         </td>
@@ -113,13 +117,24 @@ function Clients_DoctorsPage() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Client ID:</td>
-                        <td><input type="text" name="clientID" onChange={((e)=> {
-                            searchClientID(e.target.value)
+                        <td>Client First Name:</td>
+                        <td><input type="text" name="clientFname" onChange={((e)=> {
+                            searchClientFname(e.target.value)
                         })} /></td>
-                        <td>Doctor ID:</td>
-                        <td><input type="text" name="doctorID" onChange={((e)=> {
-                            searchDoctorID(e.target.value)
+                        <td>Client Last Name:</td>
+                        <td><input type="text" name="clientLname" onChange={((e)=> {
+                            searchClientLname(e.target.value)
+                        })} /></td>
+
+                    </tr>
+                    <tr>
+                        <td>Doctor First Name:</td>
+                        <td><input type="text" name="doctorFname" onChange={((e)=> {
+                            searchDoctorFname(e.target.value)
+                        })} /></td>
+                        <td>Doctor Last Name:</td>
+                        <td><input type="text" name="doctorLname" onChange={((e)=> {
+                            searchDoctorLname(e.target.value)
                         })} /></td>
                     </tr>
                 </tbody>

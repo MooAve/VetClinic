@@ -401,17 +401,25 @@ app.get("/clients_doctors/get", (req, res) => {
 
 app.post("/clients_doctors/search", (req, res) => {
     
-    const clientID = req.body.clientID;
-    const doctorID = req.body.doctorID;
+    const clientFname = req.body.clientFname;
+    const clientLname = req.body.clientLname;
+    const doctorFname = req.body.doctorFname;
+    const doctorLname = req.body.doctorLname;
 
-    const sqlSearch = `SELECT 
-        clientID,
-        doctorID
-        FROM Clients_Doctors WHERE
-        (? = '' OR clientID = ?)
-        AND (? = '' OR doctorID = ?)`
+    const sqlSearch = `SELECT
+    Clients_Doctors.clientID,
+    CONCAT(Clients.fname, " ", Clients.lname) AS client,
+    Clients_Doctors.doctorID,
+    CONCAT(Doctors.fname, " ", Doctors.lname) AS doctor
+    FROM Clients_Doctors
+    INNER JOIN Clients ON Clients_Doctors.clientID = Clients.clientID
+    INNER JOIN Doctors ON Clients_Doctors.doctorID = Doctors.doctorID WHERE
+    (? = '' OR Clients.fname = ?)
+    AND (? = '' OR Clients.lname = ?)
+    AND (? = '' OR Doctors.fname = ?)
+    AND (? = '' OR Doctors.lname = ?)`
 
-    db.query(sqlSearch, [clientID, clientID, doctorID, doctorID], (err, result) => {
+    db.query(sqlSearch, [clientFname, clientFname, clientLname, clientLname, doctorFname, doctorFname, doctorLname, doctorLname], (err, result) => {
         if (err) console.log(err);
         else res.send(result);
     });
