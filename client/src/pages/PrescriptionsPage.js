@@ -5,7 +5,6 @@ import PrescriptionsTable from '../components/PrescriptionsTable';
 
 function PrescriptionsPage() {
 
-    const [showTable, openTable] = useState(false)
     const [prescriptions, setPrescriptions] = useState([])
 
     useEffect(() => {
@@ -25,10 +24,9 @@ function PrescriptionsPage() {
     const [sDate, searchDate] = useState('')
     const [sDrug, searchDrug] = useState('')
     const [sDosage, searchDosage] = useState('')
-    const [sPetID, searchPetID] = useState('')
-    const [sDoctorID, searchDoctorID] = useState('')
-    const [sPetList, searchPetList] = useState([])
-    const [sDoctorList, searchDoctorList] = useState([])
+    const [sPetName, searchPetName] = useState('')
+    const [sDoctorFname, searchDoctorFname] = useState('')
+    const [sDoctorLname, searchDoctorLname] = useState('')
 
     //
     const loadPrescriptions = () => {
@@ -55,11 +53,11 @@ function PrescriptionsPage() {
             date: sDate,
             drug: sDrug,
             dosage: sDosage,
-            petID: sPetID,
-            doctorID: sDoctorID
+            petName: sPetName,
+            doctorFname: sDoctorFname,
+            doctorLname: sDoctorLname
         }).then((response)=> {
             setPrescriptions(response.data)
-            alert('Search Complete')
         });
     };
 
@@ -107,25 +105,25 @@ function PrescriptionsPage() {
                         <td><input type="text" name="prescriptionDosage" onChange= {((e)=> {
                             setDosage(e.target.value)
                         })} /></td>
-                        <td>*Pet ID:</td>
+                        <td>*Pet:</td>
                         <td><select name="prescriptionPetID" onChange= {((e)=> {
                             setPetID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>
                                 {petList.map((val) => {
-                                    return <option value={val.petID}>{val.petID}</option>
+                                    return <option value={val.petID}>{val.name.concat(" (", val.petID, ")")}</option>
                                 })}
                             </select> 
                         </td>
                     </tr>
                     <tr>
-                        <td>*Doctor ID:</td>
+                        <td>*Doctor:</td>
                         <td><select name="prescriptionDoctorID" onChange= {((e)=> {
                             setDoctorID(e.target.value)
                         })}>
                                 <option hidden disabled selected value></option>
                                 {doctorList.map((val) => {
-                                    return <option value={val.doctorID}>{val.doctorID}</option>
+                                    return <option value={val.doctorID}>{val.fname.concat(" ", val.lname)}</option>
                                 })}
                             </select>
                         </td>
@@ -155,15 +153,19 @@ function PrescriptionsPage() {
                         <td><input type="text" name="prescriptionDosage" onChange={((e)=> {
                             searchDosage(e.target.value)
                         })} /></td>
-                        <td>Pet ID:</td>
-                        <td><input type="number" name="prescriptionPetID" onChange={((e)=> {
-                            searchPetID(e.target.value)
+                        <td>Pet Name:</td>
+                        <td><input type="text" name="prescriptionPetName" onChange={((e)=> {
+                            searchPetName(e.target.value)
                         })} /></td>
                     </tr>
                     <tr>
-                        <td>Doctor ID:</td>
-                        <td><input type="number" name="prescriptionDoctorID" onChange={((e)=> {
-                            searchDoctorID(e.target.value)
+                        <td>Doctor First Name:</td>
+                        <td><input type="text" name="prescriptionDoctorID" onChange={((e)=> {
+                            searchDoctorFname(e.target.value)
+                        })} /></td>
+                        <td>Doctor Last Name:</td>
+                        <td><input type="text" name="prescriptionDoctorID" onChange={((e)=> {
+                            searchDoctorLname(e.target.value)
                         })} /></td>
                     </tr>
                 </tbody>

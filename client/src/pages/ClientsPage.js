@@ -54,7 +54,6 @@ function ClientsPage() {
             email: sEmail
         }).then((response)=> {
             setClients(response.data)
-            alert('Search Complete')
         });
     };
 

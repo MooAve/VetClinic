@@ -49,7 +49,6 @@ function Clients_DoctorsPage() {
             doctorLname: sDoctorLname
         }).then((response)=> {
             setClients_Doctors(response.data)
-            alert('Search Complete')
         });
     };
 

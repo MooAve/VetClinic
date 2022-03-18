@@ -165,12 +165,12 @@ app.post("/clients/search", (req, res) => {
     const email = req.body.email;
 
     const sqlSearch = `SELECT 
-        clientID,
-        fname, 
-        lname, 
-        address, 
-        phone, 
-        email
+            clientID,
+            fname, 
+            lname, 
+            address, 
+            phone, 
+            email
         FROM Clients WHERE
         (? = '' OR fname = ?)
         AND (? = '' OR lname = ?)
@@ -231,7 +231,18 @@ app.delete("/clients/:id", (req, res) => {
 //-------------------------
 
 app.get("/prescriptions/get", (req, res) => {
-    const sqlSelect = "SELECT * FROM Prescriptions";
+    const sqlSelect = `SELECT
+        prescriptionID,
+        date,
+        drug,
+        dosage,
+        CONCAT(Pets.name, " (", Pets.petID, ")") AS pet,
+        CONCAT(Doctors.fname, " ", Doctors.lname) AS doctor
+    FROM Prescriptions
+    INNER JOIN Pets
+    ON Pets.petID = Prescriptions.petID
+    INNER JOIN Doctors
+    ON Doctors.doctorID = Prescriptions.doctorID`;
     db.query(sqlSelect, (err, result) => {
         if (err) console.log(err);
         else res.send(result);
@@ -243,24 +254,31 @@ app.post("/prescriptions/search", (req, res) => {
     const date = req.body.date;
     const drug = req.body.drug;
     const dosage = req.body.dosage;
-    const petID = req.body.petID;
-    const doctorID = req.body.doctorID;
+    const petName = req.body.petName;
+    const doctorFname = req.body.doctorFname;
+    const doctorLname = req.body.doctorLname;
 
     const sqlSearch = `SELECT 
-        prescriptionID,
-        date, 
-        drug, 
-        dosage, 
-        petID, 
-        doctorID
-        FROM Prescriptions WHERE
+            prescriptionID,
+            date,
+            drug,
+            dosage,
+            CONCAT(Pets.name, " (", Pets.petID, ")") AS pet,
+            CONCAT(Doctors.fname, " ", Doctors.lname) AS doctor
+        FROM Prescriptions
+        INNER JOIN Pets
+        ON Pets.petID = Prescriptions.petID
+        INNER JOIN Doctors
+        ON Doctors.doctorID = Prescriptions.doctorID
+        WHERE
         (? = '' OR date = ?)
         AND (? = '' OR drug = ?)
         AND (? = '' OR dosage = ?)
-        AND (? = '' OR petID = ?)
-        AND (? = '' OR doctorID = ?)`
+        AND (? = '' OR Pets.name = ?)
+        AND (? = '' OR Doctors.fname = ?)
+        AND (? = '' OR Doctors.lname = ?)`;
 
-    db.query(sqlSearch, [date, date, drug, drug, dosage, dosage, petID, petID, doctorID, doctorID], (err, result) => {
+    db.query(sqlSearch, [date, date, drug, drug, dosage, dosage, petName, petName, doctorFname, doctorFname, doctorLname, doctorLname], (err, result) => {
         if (err) console.log(err);
         else res.send(result);
     });

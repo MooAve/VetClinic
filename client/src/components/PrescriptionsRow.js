@@ -17,8 +17,8 @@ function PrescriptionsRow({prescription, deletePrescription}) {
             <td>{prescription.date}</td>
             <td>{prescription.drug}</td>
             <td>{prescription.dosage}</td>
-            <td>{prescription.doctorID}</td>
-            <td>{prescription.petID}</td>
+            <td>{prescription.pet}</td>
+            <td>{prescription.doctor}</td>
 
             <td><Link to={"/Prescriptions/Edit"} state={prescription}><GrEdit /></Link></td>
             <td><GrFormTrash onClick={ () => confirmDelete()} /></td>

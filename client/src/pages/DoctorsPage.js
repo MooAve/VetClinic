@@ -50,7 +50,6 @@ function DoctorsPage() {
             email: sEmail
         }).then((response)=> {
             setDoctors(response.data)
-            alert('Search Complete')
         });
     };
 
