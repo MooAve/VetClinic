@@ -208,7 +208,7 @@ function PetsPage() {
                             <select id="sex" name="sex" onChange= {((e)=> {
                                 searchSex(e.target.value)
                             })}>
-                                <option disabled selected value></option>
+                                <option selected value=""></option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
